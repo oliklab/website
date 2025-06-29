@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yearly Mortgage Calculator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .table-container {
+      transition: all 0.5s ease-in-out;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex items-center justify-center min-h-screen px-4 py-8">
+
+  <div class="w-full max-w-5xl mx-auto bg-white dark:bg-gray-800 shadow-2xl rounded-2xl p-6 md:p-10">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Mortgage Breakdown Calculator</h1>
+      <p class="text-gray-600 dark:text-gray-400 mt-2">See how much interest you'll pay in the first 5 years, with
+        advanced cashback options.</p>
+    </div>
+
+    <!-- Input Form -->
+    <div id="calculator-form" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div>
+        <label for="loanAmount" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Loan Amount
+          (€)</label>
+        <input type="number" id="loanAmount" placeholder="e.g., 256000"
+          class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+      </div>
+      <div>
+        <label for="interestRate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Annual
+          Interest Rate (%)</label>
+        <input type="number" id="interestRate" step="0.01" placeholder="e.g., 3.35"
+          class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+      </div>
+      <div>
+        <label for="loanTerm" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Loan Term
+          (Years)</label>
+        <input type="number" id="loanTerm" placeholder="e.g., 30"
+          class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+      </div>
+
+      <!-- Cashback Options -->
+      <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="cashbackType" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cashback
+            Type</label>
+          <select id="cashbackType"
+            class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+            <option value="lumpSum">Lump Sum Amount</option>
+            <option value="loanPercent">% of Loan Value</option>
+            <option value="paymentPercent">% of Monthly Payment (Recurring)</option>
+          </select>
+        </div>
+        <div>
+          <label for="cashbackValue" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cashback
+            Value</label>
+          <div class="relative">
+            <input type="number" id="cashbackValue" placeholder="e.g., 5000"
+              class="w-full pl-4 pr-10 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+            <span id="cashbackUnit"
+              class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-500 dark:text-gray-400">€</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-3 flex items-end">
+        <button id="calculateBtn"
+          class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+          Calculate
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results" class="hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="text-center bg-gray-100 dark:bg-gray-700/50 p-4 rounded-lg">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Monthly Payment</h3>
+          <p id="monthlyPayment" class="text-2xl font-bold text-indigo-600 dark:text-indigo-400"></p>
+        </div>
+        <div id="cashback-info" class="text-center bg-gray-100 dark:bg-gray-700/50 p-4 rounded-lg">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Total Cashback (After 5 Years)</h3>
+          <p id="totalCashback" class="text-2xl font-bold text-green-600 dark:text-green-400"></p>
+        </div>
+      </div>
+      <div class="table-container opacity-0 -translate-y-4">
+        <h2 class="text-2xl font-semibold text-center mb-4 text-gray-900 dark:text-white">5-Year Payment Schedule</h2>
+        <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+          <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead class="bg-gray-50 dark:bg-gray-700">
+              <tr>
+                <th
+                  class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  Year</th>
+                <th
+                  class="px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  Principal Paid</th>
+                <th
+                  class="px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  Interest Paid</th>
+                <th
+                  class="px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  Total Payment</th>
+                <th
+                  class="px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  End Balance</th>
+                <th
+                  class="px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  Total Interest Paid (Accumulated from Previous Years)</th>
+                <th
+                  class="px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                  Net Interest Paid (After Cashback adjustment)</th>
+              </tr>
+            </thead>
+            <tbody id="resultsTableBody"
+              class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+              <!-- Rows will be inserted here by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <div id="error-message" class="hidden mt-4 text-center text-red-500 bg-red-100 dark:bg-red-900/20 p-3 rounded-lg">
+    </div>
+
+  </div>
+
+  <script>
+    // --- DOM Element References ---
+    const calculateBtn = document.getElementById('calculateBtn');
+    const cashbackTypeSelect = document.getElementById('cashbackType');
+    const cashbackValueInput = document.getElementById('cashbackValue');
+    const cashbackUnitSpan = document.getElementById('cashbackUnit');
+
+    // --- Event Listener for Cashback Type Change ---
+    cashbackTypeSelect.addEventListener('change', function () {
+      if (this.value === 'lumpSum') {
+        cashbackUnitSpan.textContent = '€';
+        cashbackValueInput.placeholder = 'e.g., 5000';
+      } else {
+        cashbackUnitSpan.textContent = '%';
+        cashbackValueInput.placeholder = 'e.g., 2';
+      }
+    });
+
+    // --- Main Calculation Logic ---
+    calculateBtn.addEventListener('click', function () {
+      // Get User Inputs
+      const principal = parseFloat(document.getElementById('loanAmount').value);
+      const annualInterestRate = parseFloat(document.getElementById('interestRate').value);
+      const termYears = parseInt(document.getElementById('loanTerm').value);
+      const cashbackType = cashbackTypeSelect.value;
+      const cashbackValue = parseFloat(cashbackValueInput.value) || 0;
+
+      const errorMessageDiv = document.getElementById('error-message');
+      const resultsDiv = document.getElementById('results');
+      const tableContainer = document.querySelector('.table-container');
+
+      // Basic Input Validation
+      if (isNaN(principal) || principal <= 0 || isNaN(annualInterestRate) || annualInterestRate <= 0 || isNaN(termYears) || termYears <= 0) {
+        errorMessageDiv.textContent = 'Please enter valid numbers for all fields to calculate.';
+        errorMessageDiv.classList.remove('hidden');
+        resultsDiv.classList.add('hidden');
+        return;
+      }
+      errorMessageDiv.classList.add('hidden');
+
+
+      // --- Core Calculations ---
+      const monthlyInterestRate = (annualInterestRate / 100) / 12;
+      const numberOfPayments = termYears * 12;
+
+      // Calculate monthly payment
+      const monthlyPayment = principal * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) / (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+
+      if (!isFinite(monthlyPayment)) {
+        errorMessageDiv.textContent = 'Could not calculate monthly payment. Please check your inputs.';
+        errorMessageDiv.classList.remove('hidden');
+        resultsDiv.classList.add('hidden');
+        return;
+      }
+
+      // --- Amortization Schedule Calculation ---
+      let remainingBalance = principal;
+      const tableBody = document.getElementById('resultsTableBody');
+      tableBody.innerHTML = ''; // Clear previous results
+      let cumulativeInterest = 0;
+      let cumulativeCashback = 0;
+
+      // Handle one-time lump sum cashbacks before the loop
+      if (cashbackType === 'lumpSum') {
+        cumulativeCashback = cashbackValue;
+      } else if (cashbackType === 'loanPercent') {
+        cumulativeCashback = principal * (cashbackValue / 100);
+      }
+
+      // Loop for the first 5 years
+      for (let year = 1; year <= 5; year++) {
+        let yearlyInterestPaid = 0;
+        let yearlyPrincipalPaid = 0;
+
+        // Loop through 12 months for the current year
+        for (let month = 1; month <= 12; month++) {
+          const interestForMonth = remainingBalance * monthlyInterestRate;
+          let principalForMonth = monthlyPayment - interestForMonth;
+
+          if (remainingBalance < principalForMonth) {
+            principalForMonth = remainingBalance;
+          }
+
+          yearlyInterestPaid += interestForMonth;
+          yearlyPrincipalPaid += principalForMonth;
+          remainingBalance -= principalForMonth;
+
+          // If cashback is recurring, calculate and add it for the month
+          if (cashbackType === 'paymentPercent') {
+            cumulativeCashback += monthlyPayment * (cashbackValue / 100);
+          }
+        }
+
+        cumulativeInterest += yearlyInterestPaid;
+        const netTotalInterest = cumulativeInterest - cumulativeCashback;
+
+        if (remainingBalance < 0) {
+          remainingBalance = 0;
+        }
+
+        // Populate the results table with new order and colors
+        const row = document.createElement('tr');
+        row.classList.add('text-sm');
+        row.innerHTML = `
+                    <td class="px-4 py-4 whitespace-nowrap font-bold text-blue-600 dark:text-blue-400">${year}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-right font-semibold text-green-600 dark:text-green-500">€${yearlyPrincipalPaid.toFixed(2)}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-right font-semibold text-red-600 dark:text-red-500">€${yearlyInterestPaid.toFixed(2)}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-right font-semibold text-green-600 dark:text-green-500">€${(yearlyPrincipalPaid + yearlyInterestPaid).toFixed(2)}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-right font-bold text-green-600 dark:text-green-500">€${remainingBalance.toFixed(2)}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-right font-semibold text-orange-600 dark:text-orange-500">€${cumulativeInterest.toFixed(2)}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-right font-semibold text-orange-600 dark:text-orange-500">€${netTotalInterest.toFixed(2)}</td>
+                `;
+        tableBody.appendChild(row);
+      }
+
+      // --- Display Results ---
+      document.getElementById('monthlyPayment').textContent = `€${monthlyPayment.toFixed(2)}`;
+
+      // Display cashback info
+      const cashbackInfoDiv = document.getElementById('cashback-info');
+      document.getElementById('totalCashback').textContent = `€${cumulativeCashback.toFixed(2)}`;
+      cashbackInfoDiv.classList.remove('hidden');
+
+      resultsDiv.classList.remove('hidden');
+
+      // Trigger animation
+      setTimeout(() => {
+        tableContainer.classList.remove('opacity-0', '-translate-y-4');
+      }, 50);
+    });
+
+    // --- Initial Load ---
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set initial UI state for cashback input but don't calculate
+      cashbackTypeSelect.dispatchEvent(new Event('change'));
+    });
+  </script>
+</body>
+
+</html>
