@@ -4,1191 +4,989 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Olik Lab - Product-First Software Solutions & Vetted Development Teams</title>
+  <title>Olik Lab | Product Engineering, AI & Games</title>
   <meta name="description"
-    content="Transform your idea into market-ready products. Olik Lab provides vetted development teams specialized in product-market fit, MVP development, and scalable solutions including Cloud and Kubernetes consultations.">
+    content="Offshore software engineering studio specializing in AI, Game Design, Cloud Infrastructure, and Vetted Development Teams.">
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <style>
+    :root {
+      --bg-body: #ffffff;
+      --bg-soft: #f8f9fc;
+      --text-main: #0f172a;
+      --text-light: #64748b;
+      --primary: #4f46e5;
+      --accent: #ec4899;
+      /* Pink for Games/Creative */
+      --teal: #06b6d4;
+      /* Teal for Cloud */
+      --gradient: linear-gradient(135deg, #4f46e5 0%, #ec4899 100%);
+      --shadow-soft: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 25px 60px -10px rgba(79, 70, 229, 0.15);
+      --radius: 20px;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-body);
+      color: var(--text-main);
       line-height: 1.6;
-      color: #1a1a1a;
       overflow-x: hidden;
     }
 
-    /* Header & Navigation */
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* --- Layout Utilities --- */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-padding {
+      padding: 8rem 0;
+    }
+
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .badge {
+      background: rgba(79, 70, 229, 0.08);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(79, 70, 229, 0.1);
+    }
+
+    /* --- Animations & Transitions --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- Header --- */
     header {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       position: fixed;
-      width: 100%;
       top: 0;
+      width: 100%;
       z-index: 1000;
+      padding: 1.5rem 0;
       transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0);
     }
 
     header.scrolled {
-      background: rgba(255, 255, 255, 0.98);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      padding: 1rem 0;
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid #f1f5f9;
     }
 
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 1rem 2rem;
     }
 
     .logo {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .nav-menu {
+      color: var(--text-main);
+      text-decoration: none;
       display: flex;
-      list-style: none;
-      gap: 2.5rem;
+      align-items: center;
+      gap: 0.6rem;
     }
 
-    .nav-menu a {
-      color: #374151;
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-main);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
       transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .nav-menu a:hover {
-      color: #6366f1;
-    }
-
-    .nav-menu a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background: linear-gradient(90deg, #6366f1, #8b5cf6);
-      transition: width 0.3s ease;
-    }
-
-    .nav-menu a:hover::after {
-      width: 100%;
-    }
-
-    .mobile-menu-btn {
-      display: none;
-      background: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       border: none;
-      color: #374151;
-      font-size: 1.5rem;
       cursor: pointer;
+      font-size: 1rem;
     }
 
-    /* Hero Section */
+    .btn-primary {
+      background: var(--text-main);
+      color: white;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      background: var(--primary);
+      box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+    }
+
+    .btn-outline {
+      border: 1px solid #e2e8f0;
+      color: var(--text-main);
+      background: white;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--text-main);
+      background: #f8fafc;
+    }
+
+    /* --- Hero Section --- */
     .hero {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      position: relative;
       min-height: 100vh;
       display: flex;
       align-items: center;
+      position: relative;
       overflow: hidden;
+      padding-top: 80px;
     }
 
-    .hero::before {
-      content: '';
+    /* Animated Blobs */
+    .blob {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background:
-        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.06) 0%, transparent 50%);
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.5;
+      z-index: -1;
       animation: float 15s infinite ease-in-out;
+    }
+
+    .blob-1 {
+      width: 600px;
+      height: 600px;
+      top: -10%;
+      right: -10%;
+      background: #e0e7ff;
+    }
+
+    .blob-2 {
+      width: 500px;
+      height: 500px;
+      bottom: -10%;
+      left: -10%;
+      background: #fce7f3;
+      animation-delay: -5s;
     }
 
     @keyframes float {
 
       0%,
       100% {
-        transform: translateY(0px) rotate(0deg);
+        transform: translate(0, 0) rotate(0deg);
       }
 
       50% {
-        transform: translateY(-20px) rotate(1deg);
+        transform: translate(30px, -30px) rotate(5deg);
       }
-    }
-
-    .hero-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-content {
-      color: white;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      padding: 0.5rem 1.5rem;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 2rem;
-      backdrop-filter: blur(10px);
     }
 
     .hero h1 {
-      font-size: 3.8rem;
-      font-weight: 800;
-      line-height: 1.1;
+      font-size: clamp(3rem, 6vw, 5rem);
+      line-height: 1.05;
       margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
+      font-weight: 800;
     }
 
-    .hero-highlight {
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-subtitle {
+    .hero p {
       font-size: 1.25rem;
+      color: var(--text-light);
+      max-width: 600px;
       margin-bottom: 2.5rem;
-      opacity: 0.95;
-      line-height: 1.6;
     }
 
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      color: white;
-      padding: 1rem 2.5rem;
-      border: none;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(245, 158, 11, 0.4);
-    }
-
-    .btn-secondary {
-      color: white;
-      padding: 1rem 2rem;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.5);
-    }
-
-    .hero-visual {
-      position: relative;
-      height: 500px;
-    }
-
-    .floating-card {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      padding: 1.5rem;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-      animation: floatCard 6s infinite ease-in-out;
-    }
-
-    .floating-card:nth-child(1) {
-      top: 20px;
-      right: 100px;
-      animation-delay: 0s;
-    }
-
-    .floating-card:nth-child(2) {
-      bottom: 150px;
-      left: 50px;
-      animation-delay: -2s;
-    }
-
-    .floating-card:nth-child(3) {
-      top: 200px;
-      right: 20px;
-      animation-delay: -4s;
-    }
-
-    @keyframes floatCard {
-
-      0%,
-      100% {
-        transform: translateY(0px) rotate(0deg);
-      }
-
-      50% {
-        transform: translateY(-15px) rotate(1deg);
-      }
-    }
-
-    .card-icon {
-      font-size: 2rem;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.5rem;
-    }
-
-    .card-title {
-      font-weight: 700;
-      color: #1f2937;
-      margin-bottom: 0.3rem;
-    }
-
-    .card-desc {
-      font-size: 0.9rem;
-      color: #6b7280;
-    }
-
-    /* Value Proposition Section */
-    .value-prop {
-      padding: 100px 2rem;
-      background: #f8fafc;
-    }
-
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .section-badge {
-      display: inline-block;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      color: white;
-      padding: 0.5rem 1.5rem;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    .section-title {
-      font-size: 3rem;
-      font-weight: 800;
-      color: #1f2937;
-      margin-bottom: 1rem;
-      line-height: 1.2;
-    }
-
-    .section-subtitle {
-      font-size: 1.25rem;
-      color: #6b7280;
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    .highlight-text {
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .value-grid {
+    /* --- Capabilities Grid --- */
+    .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2.5rem;
-      margin-top: 4rem;
-    }
-
-    .value-card {
-      background: white;
-      padding: 3rem;
-      border-radius: 24px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
-      border: 1px solid #f1f5f9;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .value-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
-    }
-
-    .value-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-    }
-
-    .value-icon {
-      width: 70px;
-      height: 70px;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .value-card h3 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #1f2937;
-      margin-bottom: 1rem;
-    }
-
-    .value-card p {
-      color: #6b7280;
-      line-height: 1.7;
-      font-size: 1.05rem;
-    }
-
-    /* Portfolio Section */
-    .portfolio {
-      padding: 100px 2rem;
-      background: white;
-    }
-
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-      gap: 3rem;
-      margin-top: 4rem;
-    }
-
-    .portfolio-card {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 24px;
-      padding: 0;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
-    }
-
-    .portfolio-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 30px 60px rgba(102, 126, 234, 0.3);
-    }
-
-    .portfolio-card:nth-child(2) {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      box-shadow: 0 20px 40px rgba(240, 147, 251, 0.2);
-    }
-
-    .portfolio-card:nth-child(2):hover {
-      box-shadow: 0 30px 60px rgba(240, 147, 251, 0.3);
-    }
-
-    .portfolio-content {
-      padding: 3rem;
-      color: white;
-    }
-
-    .portfolio-badge {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      padding: 0.3rem 1rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      display: inline-block;
-      margin-bottom: 1.5rem;
-    }
-
-    .portfolio-title {
-      font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-
-    .portfolio-desc {
-      font-size: 1.1rem;
-      opacity: 0.95;
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
-
-    .portfolio-features {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .feature-tag {
-      background: rgba(255, 255, 255, 0.15);
-      color: white;
-      padding: 0.3rem 0.8rem;
-      border-radius: 15px;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-
-    .portfolio-link {
-      color: white;
-      text-decoration: none;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.5rem;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 12px;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-
-    .portfolio-link:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateX(5px);
-    }
-
-    /* Team Section */
-    .team-section {
-      padding: 100px 2rem;
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    }
-
-    .team-features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 2rem;
       margin-top: 4rem;
     }
 
-    .team-feature {
+    .service-card {
       background: white;
       padding: 2.5rem;
-      border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-      text-align: center;
-      transition: all 0.3s ease;
+      border-radius: var(--radius);
+      border: 1px solid #f1f5f9;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
-    .team-feature:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+      border-color: transparent;
     }
 
-    .team-feature-icon {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      border-radius: 50%;
+    /* Top Border Gradient on Hover */
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      width: 60px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 2.5rem;
-      margin: 0 auto 1.5rem;
+      border-radius: 16px;
+      transition: all 0.3s;
     }
 
-    .team-feature h3 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #1f2937;
-      margin-bottom: 1rem;
-    }
-
-    .team-feature p {
-      color: #6b7280;
-      line-height: 1.6;
-    }
-
-    /* CTA Section */
-    .cta-section {
-      padding: 100px 2rem;
-      background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
-      color: white;
-      text-align: center;
-    }
-
-    .cta-content {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .cta-title {
-      font-size: 3rem;
-      font-weight: 800;
-      margin-bottom: 1.5rem;
-    }
-
-    .cta-subtitle {
-      font-size: 1.25rem;
-      opacity: 0.9;
-      margin-bottom: 3rem;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* Footer */
-    footer {
-      background: #0f172a;
-      color: white;
-      padding: 4rem 2rem 2rem;
-    }
-
-    .footer-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    .footer-section h3 {
-      margin-bottom: 1.5rem;
-      color: white;
-      font-weight: 700;
-    }
-
-    .footer-section p {
-      color: #94a3b8;
-      margin-bottom: 1rem;
-    }
-
-    .footer-section a {
-      color: #cbd5e1;
-      text-decoration: none;
-      display: block;
+    .service-card h3 {
       margin-bottom: 0.8rem;
-      transition: color 0.3s ease;
+      font-size: 1.35rem;
     }
 
-    .footer-section a:hover {
-      color: #6366f1;
+    .service-card p {
+      font-size: 1rem;
+      color: var(--text-light);
+      flex-grow: 1;
     }
 
-    .footer-bottom {
-      border-top: 1px solid #334155;
-      padding-top: 2rem;
+    /* --- Portfolio (CSS Generated Graphics) --- */
+    .portfolio-section {
+      background: var(--bg-soft);
+      position: relative;
+    }
+
+    /* Subtle grid pattern for technical feel */
+    .portfolio-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-bottom: 8rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-card.reversed {
+      grid-template-columns: 1fr 1.2fr;
+      direction: rtl;
+    }
+
+    .project-card.reversed .project-content {
+      direction: ltr;
+    }
+
+    .project-visual {
+      height: 450px;
+      background: white;
+      border-radius: 24px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid #e2e8f0;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* --- CSS ART: Dashboard (Maker's Ledger) --- */
+    .css-dashboard {
+      width: 85%;
+      height: 75%;
+      background: #fff;
+      display: flex;
+      border-radius: 12px;
+      border: 1px solid #eee;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+    }
+
+    .dash-side {
+      width: 20%;
+      background: #f8fafc;
+      border-right: 1px solid #eee;
+      padding: 20px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dash-pill {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    .dash-main {
+      flex: 1;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .dash-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .dash-avatar {
+      width: 24px;
+      height: 24px;
+      background: #e2e8f0;
+      border-radius: 50%;
+    }
+
+    .dash-cards {
+      display: flex;
+      gap: 15px;
+    }
+
+    .dash-card {
+      flex: 1;
+      height: 80px;
+      background: linear-gradient(135deg, #f8fafc, #fff);
+      border: 1px solid #eee;
+      border-radius: 8px;
+    }
+
+    .dash-chart {
+      flex: 1;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 15px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      gap: 8px;
+      position: relative;
+    }
+
+    /* Animated Bars */
+    .d-bar {
+      width: 12%;
+      background: var(--primary);
+      border-radius: 4px 4px 0 0;
+      opacity: 0.8;
+      animation: growBar 2s ease-out forwards;
+      transform-origin: bottom;
+    }
+
+    @keyframes growBar {
+      from {
+        transform: scaleY(0);
+      }
+
+      to {
+        transform: scaleY(1);
+      }
+    }
+
+    /* --- CSS ART: Map (Adeffi) --- */
+    .css-map {
+      width: 100%;
+      height: 100%;
+      background: #f1f5f9;
+      position: relative;
+    }
+
+    .map-grid {
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.5;
+    }
+
+    /* Pins */
+    .map-pin {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: var(--accent);
+      border-radius: 50% 50% 0 50%;
+      transform: rotate(45deg);
+      border: 3px solid white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      z-index: 2;
+      animation: floatPin 3s infinite ease-in-out;
+    }
+
+    .pin-1 {
+      top: 40%;
+      left: 50%;
+    }
+
+    .pin-2 {
+      top: 65%;
+      left: 30%;
+      animation-delay: 0.5s;
+      background: var(--primary);
+    }
+
+    .pin-3 {
+      top: 25%;
+      left: 70%;
+      animation-delay: 1s;
+      background: var(--teal);
+    }
+
+    @keyframes floatPin {
+
+      0%,
+      100% {
+        transform: rotate(45deg) translateY(0);
+      }
+
+      50% {
+        transform: rotate(45deg) translateY(-10px);
+      }
+    }
+
+    /* Pulse Effect */
+    .map-pulse {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent);
+      transform: translate(-0%, -0%);
+      animation: pulse 2s infinite;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* UI Element on Map */
+    .map-ui {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      width: 160px;
+      height: 60px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      padding: 12px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .project-content h3 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-content p {
+      color: var(--text-light);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .tech-tag {
+      background: white;
+      border: 1px solid #e2e8f0;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* --- Contact --- */
+    .contact-box {
+      background: var(--text-main);
+      color: white;
+      border-radius: 24px;
+      padding: 6rem 2rem;
       text-align: center;
-      color: #64748b;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
     }
 
-    /* Mobile Responsive */
+    .contact-box h2 {
+      color: white;
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .mail-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      color: #fff;
+      text-decoration: none;
+      padding-bottom: 5px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s;
+      margin-top: 1rem;
+    }
+
+    .mail-link:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      padding-bottom: 8px;
+    }
+
+    /* --- Mobile --- */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
     @media (max-width: 1024px) {
-      .hero-container {
+
+      .project-card,
+      .project-card.reversed {
         grid-template-columns: 1fr;
-        text-align: center;
+        direction: ltr;
         gap: 3rem;
+        margin-bottom: 6rem;
       }
 
-      .hero-visual {
-        height: 400px;
+      .project-visual {
+        height: 350px;
       }
 
-      .portfolio-grid {
+      .services-grid {
         grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
       }
     }
 
     @media (max-width: 768px) {
-      .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 80px;
-        flex-direction: column;
-        background: rgba(255, 255, 255, 0.98);
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        backdrop-filter: blur(20px);
-        padding: 2rem 0;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      }
-
-      .nav-menu.active {
-        left: 0;
+      .nav-links {
+        display: none;
       }
 
       .mobile-menu-btn {
         display: block;
       }
 
-      .hero h1 {
-        font-size: 2.8rem;
+      .section-padding {
+        padding: 5rem 0;
       }
 
-      .section-title {
+      .contact-box {
+        padding: 4rem 1.5rem;
+      }
+
+      .contact-box h2 {
         font-size: 2.2rem;
       }
 
-      .cta-title {
-        font-size: 2.2rem;
+      .mail-link {
+        font-size: 1.2rem;
       }
-
-      .hero-cta {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .value-grid,
-      .portfolio-grid,
-      .team-features {
-        grid-template-columns: 1fr;
-      }
-
-      .portfolio-card {
-        min-width: unset;
-      }
-
-      section {
-        padding: 80px 1rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero {
-        padding: 100px 1rem 60px;
-      }
-
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-
-      nav {
-        padding: 1rem;
-      }
-
-      .floating-card {
-        padding: 1rem;
-        transform: scale(0.9);
-      }
-    }
-
-    /* Smooth animations */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
   </style>
 </head>
 
 <body>
-  <!-- Header -->
+
   <header>
-    <nav>
-      <div class="logo">Olik Lab</div>
-      <ul class="nav-menu">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="mobile-menu-btn">
-        <i class="fas fa-bars"></i>
-      </button>
-    </nav>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo">
+          <i class="fas fa-layer-group" style="color: var(--primary);"></i> Olik Lab
+        </a>
+        <ul class="nav-links">
+          <li><a href="#capabilities">Capabilities</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Book a Call</a>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+      </nav>
+    </div>
   </header>
 
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="hero-container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <i class="fas fa-rocket"></i> Product-First Development
-        </div>
+  <section class="hero">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="container">
+      <div class="hero-content reveal active">
+        <div class="badge">Product-First Engineering</div>
         <h1>
-          Transform Your <span class="hero-highlight">Ideas</span> Into
-          Market-Ready Products
+          We Build Software <br>
+          That <span class="gradient-text">Actually Works.</span>
         </h1>
-        <p class="hero-subtitle">
-          We don't just build software – we craft products that achieve product-market fit.
-          Our vetted development teams specialize in turning your vision into scalable,
-          market-validated solutions that users love.
+        <p>
+          Olik Lab is an elite offshore collective. We specialize in Generative AI, Game Development, Cloud
+          Infrastructure, and deploying vetted product teams.
         </p>
-        <div class="hero-cta">
-          <a href="#contact" class="btn-primary">
-            Start Your Product Journey <i class="fas fa-arrow-right"></i>
-          </a>
-          <a href="#portfolio" class="btn-secondary">View Our Work</a>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="floating-card">
-          <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
-          <div class="card-title">MVP Development</div>
-          <div class="card-desc">Rapid prototyping & validation</div>
-        </div>
-        <div class="floating-card">
-          <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-          <div class="card-title">Market Fit Analysis</div>
-          <div class="card-desc">Data-driven product decisions</div>
-        </div>
-        <div class="floating-card">
-          <div class="card-icon"><i class="fas fa-users"></i></div>
-          <div class="card-title">Vetted Teams</div>
-          <div class="card-desc">Pre-screened expert developers</div>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
+          <a href="#capabilities" class="btn btn-outline">Our Capabilities</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Value Proposition Section -->
-  <section id="about" class="value-prop">
+  <section id="capabilities" class="section-padding">
     <div class="container">
-      <div class="section-header fade-in">
-        <div class="section-badge">Why Choose Olik Lab</div>
-        <h2 class="section-title">
-          We Build Products That <span class="highlight-text">Win Markets</span>
-        </h2>
-        <p class="section-subtitle">
-          Unlike traditional development shops, we focus on product success. Our approach combines
-          market research, user validation, and technical excellence to ensure your product doesn't
-          just launch – it thrives.
-        </p>
+      <div class="reveal">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Capabilities</h2>
+        <p style="color: var(--text-light); max-width: 600px;">From strategic discovery to high-scale deployment. Our
+          technical foundation lets your business scale without limits.</p>
       </div>
 
-      <div class="value-grid">
-        <div class="value-card fade-in">
-          <div class="value-icon">
-            <i class="fas fa-target"></i>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon" style="background: #eff6ff; color: var(--primary);"><i class="fas fa-compass"></i>
           </div>
-          <h3>Product-Market Fit Focus</h3>
-          <p>We don't just build features – we build solutions that solve real problems. Our team conducts thorough
-            market research and user validation to ensure your product meets actual market demands before we write the
-            first line of code.</p>
+          <h3>Product Strategy & Discovery</h3>
+          <p>We ensure product-market fit before writing code. We conduct market analysis, user validation, and roadmap
+            planning to solve the right problems.</p>
         </div>
 
-        <div class="value-card fade-in">
-          <div class="value-icon">
-            <i class="fas fa-user-check"></i>
+        <div class="service-card reveal">
+          <div class="service-icon" style="background: #fdf2f8; color: var(--accent);"><i class="fas fa-gamepad"></i>
           </div>
-          <h3>Pre-Vetted Expert Teams</h3>
-          <p>Skip the hiring hassles. Our developers are rigorously screened for technical skills, communication
-            abilities, and product mindset. Each team member has proven experience in building successful products from
-            concept to scale.</p>
+          <h3>Game Design & Development</h3>
+          <p>Immersive experiences built on Unity and Unreal. From mobile 2D games to complex 3D environments, we handle
+            mechanics, assets, and multiplayer logic.</p>
         </div>
 
-        <div class="value-card fade-in">
-          <div class="value-icon">
-            <i class="fas fa-tachometer-alt"></i>
-          </div>
-          <h3>Rapid MVP to Scale</h3>
-          <p>From initial MVP to full-scale product, we maintain velocity without compromising quality. Our agile
-            approach ensures you can test, learn, and iterate quickly to find your product-market fit faster.</p>
+        <div class="service-card reveal">
+          <div class="service-icon" style="background: #f5f3ff; color: #7c3aed;"><i class="fas fa-brain"></i></div>
+          <h3>AI & LLM Solutions</h3>
+          <p>Move beyond hype. We build custom RAG pipelines, fine-tune models, and deploy intelligent agents that
+            automate real business workflows.</p>
         </div>
 
-        <div class="value-card fade-in">
-          <div class="value-icon">
-            <i class="fas fa-cogs"></i>
-          </div>
-          <h3>Cloud, AI & DevOps</h3>
-          <p>We build future-proof solutions using modern technologies. Our expertise includes cloud architecture,
-            Kubernetes consultations, CI/CD pipelines, and implementing intelligent AI agents to give you a competitive
-            edge.</p>
+        <div class="service-card reveal">
+          <div class="service-icon" style="background: #ecfeff; color: var(--teal);"><i class="fas fa-cloud"></i></div>
+          <h3>Cloud & Infrastructure</h3>
+          <p>AWS & Azure experts. We build self-healing Kubernetes clusters, robust CI/CD pipelines, and secure
+            infrastructure that scales cost-effectively.</p>
         </div>
 
-        <div class="value-card fade-in">
-          <div class="value-icon">
-            <i class="fas fa-expand-arrows-alt"></i>
-          </div>
-          <h3>Flexible Team Scaling</h3>
-          <p>Whether you need a single expert or a full product team, we scale with your needs. From 0.5x part-time
-            support to enterprise-level teams, we adapt to your product's growth trajectory.</p>
+        <div class="service-card reveal">
+          <div class="service-icon" style="background: #f0fdf4; color: #16a34a;"><i class="fas fa-server"></i></div>
+          <h3>Service Development</h3>
+          <p>High-performance backends and microservices. We architect secure APIs and handle complex data migrations
+            for mission-critical applications.</p>
         </div>
 
-        <div class="value-card fade-in">
-          <div class="value-icon">
-            <i class="fas fa-infinity"></i>
-          </div>
-          <h3>End-to-End Ownership</h3>
-          <p>From initial concept and design to development, deployment, and go-to-market strategy – we own the entire
-            product lifecycle. One team, one vision, one successful product.</p>
+        <div class="service-card reveal">
+          <div class="service-icon" style="background: #fff7ed; color: #ea580c;"><i class="fas fa-users"></i></div>
+          <h3>Vetted Product Teams</h3>
+          <p>Skip the hiring nightmare. We provide ready-to-deploy squads (Devs + QA + PM) that integrate into your
+            workflow within 2 weeks.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Portfolio Section -->
-  <section id="portfolio" class="portfolio">
+  <section id="portfolio" class="portfolio-section section-padding">
     <div class="container">
-      <div class="section-header fade-in">
-        <div class="section-badge">Our Success Stories</div>
-        <h2 class="section-title">Products We've Built & Scaled</h2>
-        <p class="section-subtitle">
-          Real products, real users, real success. See how we've helped startups and enterprises
-          transform their ideas into market-leading solutions.
-        </p>
+      <div class="reveal" style="margin-bottom: 5rem;">
+        <h2 style="font-size: 2.5rem;">Selected Work</h2>
+        <p style="color: var(--text-light);">Real products we've engineered and scaled.</p>
       </div>
 
-      <div class="portfolio-grid">
-        <div class="portfolio-card fade-in">
-          <div class="portfolio-content">
-            <div class="portfolio-badge">SaaS Platform</div>
-            <h3 class="portfolio-title">Maker's Ledger</h3>
-            <p class="portfolio-desc">
-              A comprehensive project management and financial tracking platform designed specifically
-              for makers and creative professionals. Built with modern web technologies and intuitive UX.
-            </p>
-            <div class="portfolio-features">
-              <span class="feature-tag">React</span>
-              <span class="feature-tag">Node.js</span>
-              <span class="feature-tag">PostgreSQL</span>
-              <span class="feature-tag">Payment Integration</span>
-              <span class="feature-tag">Real-time Analytics</span>
+      <div class="project-card reveal">
+        <div class="project-visual">
+          <div class="css-dashboard">
+            <div class="dash-side">
+              <div class="dash-pill" style="width: 60%;"></div>
+              <div class="dash-pill"></div>
+              <div class="dash-pill"></div>
             </div>
-            <a href="https://makersledger.com" target="_blank" class="portfolio-link">
-              Visit Maker's Ledger <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="portfolio-card fade-in">
-          <div class="portfolio-content">
-            <div class="portfolio-badge">AdTech Platform</div>
-            <h3 class="portfolio-title">Adeffi BD</h3>
-            <p class="portfolio-desc">
-              Revolutionary out-of-home (OOH) advertising platform that connects advertisers with
-              premium billboard locations. Features real-time booking, analytics, and campaign management.
-            </p>
-            <div class="portfolio-features">
-              <span class="feature-tag">Vue.js</span>
-              <span class="feature-tag">Laravel</span>
-              <span class="feature-tag">Google Maps API</span>
-              <span class="feature-tag">Payment Gateway</span>
-              <span class="feature-tag">Mobile App</span>
+            <div class="dash-main">
+              <div class="dash-head">
+                <div class="dash-pill" style="width: 100px;"></div>
+                <div class="dash-avatar"></div>
+              </div>
+              <div class="dash-cards">
+                <div class="dash-card"></div>
+                <div class="dash-card"></div>
+              </div>
+              <div class="dash-chart">
+                <div class="d-bar" style="height: 40%;"></div>
+                <div class="d-bar" style="height: 70%; animation-delay: 0.1s;"></div>
+                <div class="d-bar" style="height: 50%; animation-delay: 0.2s;"></div>
+                <div class="d-bar" style="height: 90%; animation-delay: 0.3s;"></div>
+                <div class="d-bar" style="height: 60%; animation-delay: 0.4s;"></div>
+              </div>
             </div>
-            <a href="https://adeffi.com" target="_blank" class="portfolio-link">
-              Visit Adeffi BD <i class="fas fa-external-link-alt"></i>
-            </a>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+        <div class="project-content">
+          <div class="badge">SaaS Platform</div>
+          <h3>Maker's Ledger</h3>
+          <p>A comprehensive financial tracking and project management suite tailored for creative professionals. We
+            handled full-stack development, payment integration, and real-time analytics dashboards.</p>
 
-  <!-- Team Section -->
-  <section id="team" class="team-section">
-    <div class="container">
-      <div class="section-header fade-in">
-        <div class="section-badge">Vetted Excellence</div>
-        <h2 class="section-title">
-          Pre-Screened Teams Ready to <span class="highlight-text">Deliver</span>
-        </h2>
-        <p class="section-subtitle">
-          No more hiring headaches or lengthy onboarding. Our teams are pre-vetted,
-          product-focused, and ready to start building your success story from day one.
-        </p>
-      </div>
-
-      <div class="team-features">
-        <div class="team-feature fade-in">
-          <div class="team-feature-icon">
-            <i class="fas fa-graduation-cap"></i>
+          <div class="tech-stack">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">Stripe</span>
           </div>
-          <h3>Technical Excellence</h3>
-          <p>Every developer passes rigorous technical assessments covering modern frameworks, best practices, and
-            problem-solving abilities. Only the top 5% make it to our teams.</p>
-        </div>
 
-        <div class="team-feature fade-in">
-          <div class="team-feature-icon">
-            <i class="fas fa-comments"></i>
-          </div>
-          <h3>Communication Masters</h3>
-          <p>Fluent English communication and cultural alignment ensure seamless collaboration. Our team members are
-            trained in agile methodologies and client communication.</p>
-        </div>
-
-        <div class="team-feature fade-in">
-          <div class="team-feature-icon">
-            <i class="fas fa-brain"></i>
-          </div>
-          <h3>Product Mindset</h3>
-          <p>Beyond coding skills, our team thinks like product owners. They understand user needs, market dynamics, and
-            business goals to build features that drive growth.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Process Section -->
-  <section class="value-prop" style="background: white;">
-    <div class="container">
-      <div class="section-header fade-in">
-        <div class="section-badge">Our Process</div>
-        <h2 class="section-title">
-          From Idea to <span class="highlight-text">Market Success</span>
-        </h2>
-        <p class="section-subtitle">
-          Our proven methodology ensures your product doesn't just get built – it gets built right,
-          for the right market, with the right features that users actually want.
-        </p>
-      </div>
-
-      <div class="value-grid">
-        <div class="value-card fade-in">
-          <div class="value-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-            <i class="fas fa-search"></i>
-          </div>
-          <h3>1. Market Discovery</h3>
-          <p>We start by understanding your market, analyzing competitors, and identifying opportunities. User research
-            and market validation guide every product decision from day one.</p>
-        </div>
-
-        <div class="value-card fade-in">
-          <div class="value-icon" style="background: linear-gradient(135deg, #ec4899, #be185d);">
-            <i class="fas fa-drafting-compass"></i>
-          </div>
-          <h3>2. Product Design</h3>
-          <p>Strategic product planning, user experience design, and technical architecture. We create detailed product
-            roadmaps and validate concepts before development begins.</p>
-        </div>
-
-        <div class="value-card fade-in">
-          <div class="value-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
-            <i class="fas fa-rocket"></i>
-          </div>
-          <h3>3. MVP Development</h3>
-          <p>Rapid development of your Minimum Viable Product with core features that solve the primary user problem.
-            Built for quick market testing and user feedback collection.</p>
-        </div>
-
-        <div class="value-card fade-in">
-          <div class="value-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <h3>4. Test & Iterate</h3>
-          <p>Launch, measure, learn, repeat. We implement comprehensive analytics, gather user feedback, and
-            continuously improve the product based on real usage data.</p>
-        </div>
-
-        <div class="value-card fade-in">
-          <div class="value-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
-            <i class="fas fa-expand-arrows-alt"></i>
-          </div>
-          <h3>5. Scale & Optimize</h3>
-          <p>Once product-market fit is achieved, we scale the product architecture, add advanced features, and optimize
-            for growth and performance.</p>
-        </div>
-
-        <div class="value-card fade-in">
-          <div class="value-icon" style="background: linear-gradient(135deg, #f97316, #ea580c);">
-            <i class="fas fa-bullhorn"></i>
-          </div>
-          <h3>6. Go-to-Market</h3>
-          <p>Strategic launch planning, marketing automation, and growth hacking techniques to ensure your product
-            reaches its target audience effectively.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section" id="contact">
-    <div class="container">
-      <div class="cta-content fade-in">
-        <h2 class="cta-title">Ready to Build Your Next Success Story?</h2>
-        <p class="cta-subtitle">
-          Join successful startups and enterprises who trusted us to transform their ideas into
-          market-winning products. Let's discuss your vision and create something amazing together.
-        </p>
-        <div class="cta-buttons">
-          <a href="mailto:hello@oliklab.com" class="btn-primary">
-            Start Your Product Journey <i class="fas fa-arrow-right"></i>
+          <a href="https://makersledger.com" target="_blank" class="btn btn-primary">
+            Visit Live Site <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i>
           </a>
-          <a href="mailto:hello@oliklab.com?subject=Portfolio Review Request" class="btn-secondary">
-            Schedule a Call
+        </div>
+      </div>
+
+      <div class="project-card reversed reveal">
+        <div class="project-visual">
+          <div class="css-map">
+            <div class="map-grid"></div>
+            <div class="map-pulse"></div>
+            <div class="map-pin pin-1"></div>
+            <div class="map-pin pin-2"></div>
+            <div class="map-pin pin-3"></div>
+            <div class="map-ui">
+              <div class="dash-pill" style="width: 80%; background: #cbd5e1;"></div>
+              <div class="dash-pill" style="width: 50%; background: var(--accent); opacity: 0.5;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="badge">AdTech Platform</div>
+          <h3>Adeffi BD</h3>
+          <p>A revolutionary Out-Of-Home (OOH) advertising platform. We built a geolocation-based booking system
+            allowing advertisers to find, book, and track billboard campaigns in real-time.</p>
+
+          <div class="tech-stack">
+            <span class="tech-tag">Vue.js</span>
+            <span class="tech-tag">Laravel</span>
+            <span class="tech-tag">Google Maps API</span>
+            <span class="tech-tag">Analytics</span>
+          </div>
+
+          <a href="https://adeffi.com" target="_blank" class="btn btn-primary">
+            Visit Live Site <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i>
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>Olik Lab</h3>
-        <p>Transforming ideas into market-ready products with vetted development teams and a product-first approach.</p>
-        <p>Building the future, one successful product at a time.</p>
+  <section id="teams" class="section-padding" style="background: white;">
+    <div class="container">
+      <div class="reveal" style="text-align: center; max-width: 700px; margin: 0 auto 4rem auto;">
+        <h2>Engineering Powerhouse</h2>
+        <p style="color: var(--text-light); margin-top: 1rem;">
+          We operate as an extension of your internal team. High availability, fluent communication, and product-focused
+          mindsets.
+        </p>
       </div>
 
-      <div class="footer-section">
-        <h3>Services</h3>
-        <a href="#about">Product-Market Fit Development</a>
-        <a href="#about">MVP Development</a>
-        <a href="#about">Vetted Team Scaling</a>
-        <a href="#about">Cloud, AI & DevOps</a>
-        <a href="#about">Full Product Lifecycle</a>
-      </div>
-
-      <div class="footer-section">
-        <h3>Portfolio</h3>
-        <a href="https://makersledger.com" target="_blank">Maker's Ledger</a>
-        <a href="https://adeffi.com" target="_blank">Adeffi BD</a>
-        <a href="#portfolio">View All Projects</a>
-      </div>
-
-      <div class="footer-section">
-        <h3>Get Started</h3>
-        <a href="mailto:hello@oliklab.com">hello@oliklab.com</a>
-        <a href="https://oliklab.com">oliklab.com</a>
-        <p>Transform your idea into reality today.</p>
+      <div class="services-grid reveal"
+        style="margin-top: 0; text-align: center; border-top: 1px solid #f1f5f9; padding-top: 3rem;">
+        <div>
+          <div class="gradient-text" style="font-size: 3.5rem; font-weight: 800; line-height: 1;">Top 5%</div>
+          <p style="color: var(--text-light); margin-top: 0.5rem;">Talent Acceptance Rate</p>
+        </div>
+        <div>
+          <div class="gradient-text" style="font-size: 3.5rem; font-weight: 800; line-height: 1;">2 Wks</div>
+          <p style="color: var(--text-light); margin-top: 0.5rem;">Avg. Deployment Time</p>
+        </div>
+        <div>
+          <div class="gradient-text" style="font-size: 3.5rem; font-weight: 800; line-height: 1;">100%</div>
+          <p style="color: var(--text-light); margin-top: 0.5rem;">Client Retention</p>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="footer-bottom">
-      <p>&copy; 2024 Olik Lab. All rights reserved. Turning visions into market-winning products.</p>
+  <section id="contact" class="section-padding">
+    <div class="container">
+      <div class="contact-box reveal">
+        <h2>Ready to Scale?</h2>
+        <p style="max-width: 600px; margin: 0 auto 2rem auto; opacity: 0.9;">
+          Whether you need a single AI expert, a Unity developer, or a full product squad, we are ready to start.
+        </p>
+        <div style="margin-top: 2.5rem;">
+          <p style="color: rgba(255,255,255,0.7); font-size: 1rem; margin-bottom: 0.5rem;">Email us directly at</p>
+          <a href="mailto:hello@oliklab.com" class="mail-link">
+            hello@oliklab.com <i class="fas fa-arrow-right" style="font-size: 1.2rem; transform: rotate(-45deg);"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding: 3rem 0; background: white; border-top: 1px solid #f1f5f9;">
+    <div class="container"
+      style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <div class="logo" style="font-size: 1.2rem;">Olik Lab.</div>
+      <div style="color: var(--text-light); font-size: 0.9rem;">
+        &copy; 2025 Olik Lab. All rights reserved.
+      </div>
     </div>
   </footer>
 
   <script>
-    // Mobile menu functionality
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navMenu = document.querySelector('.nav-menu');
-
-    mobileMenuBtn.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      const icon = mobileMenuBtn.querySelector('i');
-      if (navMenu.classList.contains('active')) {
-        icon.classList.replace('fa-bars', 'fa-times');
-      } else {
-        icon.classList.replace('fa-times', 'fa-bars');
-      }
-    });
-
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        const icon = mobileMenuBtn.querySelector('i');
-        icon.classList.replace('fa-times', 'fa-bars');
+    // Scroll Animation Observer
+    const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('active'); }
       });
+    }, observerOptions);
+    document.querySelectorAll('.reveal').forEach(el => { observer.observe(el); });
+
+    // Header Scrolled State
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
     });
 
-    // Smooth scrolling for navigation links
+    // Smooth Scroll for Anchors
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-          const headerOffset = 80;
-          const elementPosition = target.offsetTop;
-          const offsetPosition = elementPosition - headerOffset;
-
           window.scrollTo({
-            top: offsetPosition,
+            top: target.offsetTop - 80,
             behavior: 'smooth'
           });
         }
       });
     });
 
-    // Header scroll effect
-    window.addEventListener('scroll', () => {
-      const header = document.querySelector('header');
-      if (window.scrollY > 100) {
-        header.classList.add('scrolled');
+    // Mobile Menu
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuBtn.addEventListener('click', () => {
+      if (navLinks.style.display === 'flex') {
+        navLinks.style.display = 'none';
       } else {
-        header.classList.remove('scrolled');
+        navLinks.style.display = 'flex';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '100%';
+        navLinks.style.left = '0';
+        navLinks.style.width = '100%';
+        navLinks.style.background = 'white';
+        navLinks.style.padding = '2rem';
+        navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
       }
-    });
-
-    // Intersection Observer for animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    // Observe all fade-in elements
-    document.querySelectorAll('.fade-in').forEach(el => {
-      observer.observe(el);
     });
   </script>
 </body>
