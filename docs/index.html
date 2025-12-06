@@ -4,32 +4,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Olik Lab | Product Engineering, AI & Games</title>
+  <title>Olik Lab | Elite Product Engineering</title>
   <meta name="description"
     content="Offshore software engineering studio specializing in AI, Game Design, Cloud Infrastructure, and Vetted Development Teams.">
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <style>
     :root {
       --bg-body: #ffffff;
-      --bg-soft: #f8f9fc;
+      --bg-soft: #f8fafc;
       --text-main: #0f172a;
-      --text-light: #64748b;
+      --text-muted: #64748b;
       --primary: #4f46e5;
       --accent: #ec4899;
-      /* Pink for Games/Creative */
       --teal: #06b6d4;
-      /* Teal for Cloud */
-      --gradient: linear-gradient(135deg, #4f46e5 0%, #ec4899 100%);
-      --shadow-soft: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
-      --shadow-hover: 0 25px 60px -10px rgba(79, 70, 229, 0.15);
-      --radius: 20px;
+      --green: #10b981;
+      --gradient-text: linear-gradient(135deg, #4f46e5 0%, #ec4899 100%);
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --card-radius: 16px;
     }
 
     * {
@@ -43,7 +45,7 @@
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-body);
       background: var(--bg-body);
       color: var(--text-main);
       line-height: 1.6;
@@ -54,51 +56,88 @@
     h2,
     h3,
     h4 {
-      font-family: 'Outfit', sans-serif;
+      font-family: var(--font-display);
       font-weight: 700;
       letter-spacing: -0.02em;
     }
 
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* --- Background Aurora Blobs --- */
+    .aurora-bg {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+      background: #ffffff;
+      pointer-events: none;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.6;
+      animation: float 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .blob-1 {
+      top: -10%;
+      left: -10%;
+      width: 50vw;
+      height: 50vw;
+      background: #e0e7ff;
+    }
+
+    .blob-2 {
+      bottom: -10%;
+      right: -10%;
+      width: 40vw;
+      height: 40vw;
+      background: #fce7f3;
+      animation-delay: -5s;
+    }
+
+    .blob-3 {
+      top: 40%;
+      left: 30%;
+      width: 30vw;
+      height: 30vw;
+      background: #ccfbf1;
+      animation-delay: -10s;
+      opacity: 0.4;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(40px, -40px) scale(1.05);
+      }
+    }
+
     /* --- Layout Utilities --- */
     .container {
-      max-width: 1280px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 0 2rem;
     }
 
     .section-padding {
-      padding: 8rem 0;
+      padding: 6rem 0;
     }
 
     .gradient-text {
-      background: var(--gradient);
+      background: var(--gradient-text);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      display: inline-block;
-    }
-
-    .badge {
-      background: rgba(79, 70, 229, 0.08);
-      color: var(--primary);
-      padding: 0.5rem 1rem;
-      border-radius: 100px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      display: inline-block;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(79, 70, 229, 0.1);
-    }
-
-    /* --- Animations & Transitions --- */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
+      background-clip: text;
     }
 
     /* --- Header --- */
@@ -107,17 +146,16 @@
       top: 0;
       width: 100%;
       z-index: 1000;
-      padding: 1.5rem 0;
+      padding: 1.2rem 0;
       transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
     }
 
     header.scrolled {
-      padding: 1rem 0;
-      background: rgba(255, 255, 255, 0.95);
-      border-bottom: 1px solid #f1f5f9;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.9);
     }
 
     nav {
@@ -127,10 +165,9 @@
     }
 
     .logo {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 800;
       color: var(--text-main);
-      text-decoration: none;
       display: flex;
       align-items: center;
       gap: 0.6rem;
@@ -138,561 +175,509 @@
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 2rem;
       list-style: none;
     }
 
     .nav-links a {
+      font-weight: 500;
+      font-size: 0.9rem;
       color: var(--text-main);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      position: relative;
-      transition: color 0.3s;
+      transition: color 0.2s;
     }
 
     .nav-links a:hover {
       color: var(--primary);
     }
 
-    /* --- Buttons --- */
     .btn {
-      padding: 0.9rem 2rem;
-      border-radius: 50px;
+      padding: 0.7rem 1.8rem;
+      border-radius: 100px;
       font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      transition: all 0.3s ease;
       border: none;
-      cursor: pointer;
-      font-size: 1rem;
     }
 
     .btn-primary {
       background: var(--text-main);
       color: white;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
     }
 
     .btn-primary:hover {
-      transform: translateY(-3px);
       background: var(--primary);
-      box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
     }
 
     .btn-outline {
+      background: white;
       border: 1px solid #e2e8f0;
       color: var(--text-main);
-      background: white;
-    }
-
-    .btn-outline:hover {
-      border-color: var(--text-main);
-      background: #f8fafc;
     }
 
     /* --- Hero Section --- */
     .hero {
-      min-height: 100vh;
+      min-height: 90vh;
       display: flex;
       align-items: center;
-      position: relative;
-      overflow: hidden;
       padding-top: 80px;
+      text-align: left;
     }
 
-    /* Animated Blobs */
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.5;
-      z-index: -1;
-      animation: float 15s infinite ease-in-out;
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
-    .blob-1 {
-      width: 600px;
-      height: 600px;
-      top: -10%;
-      right: -10%;
-      background: #e0e7ff;
+    .hero-tags-wrapper {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
     }
 
-    .blob-2 {
-      width: 500px;
-      height: 500px;
-      bottom: -10%;
-      left: -10%;
-      background: #fce7f3;
-      animation-delay: -5s;
+    .tag-pill {
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
     }
 
-    @keyframes float {
+    .tag-green {
+      background: linear-gradient(90deg, rgba(209, 250, 229, 0.6) 0%, rgba(167, 243, 208, 0.4) 100%);
+      color: #065f46;
+      border-color: #a7f3d0;
+    }
 
-      0%,
-      100% {
-        transform: translate(0, 0) rotate(0deg);
-      }
-
-      50% {
-        transform: translate(30px, -30px) rotate(5deg);
-      }
+    .tag-blue {
+      background: linear-gradient(90deg, rgba(224, 231, 255, 0.6) 0%, rgba(199, 210, 254, 0.4) 100%);
+      color: #3730a3;
+      border-color: #c7d2fe;
     }
 
     .hero h1 {
-      font-size: clamp(3rem, 6vw, 5rem);
-      line-height: 1.05;
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      line-height: 1.1;
       margin-bottom: 1.5rem;
-      font-weight: 800;
-    }
-
-    .hero p {
-      font-size: 1.25rem;
-      color: var(--text-light);
-      max-width: 600px;
-      margin-bottom: 2.5rem;
-    }
-
-    /* --- Capabilities Grid --- */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 2rem;
-      margin-top: 4rem;
-    }
-
-    .service-card {
-      background: white;
-      padding: 2.5rem;
-      border-radius: var(--radius);
-      border: 1px solid #f1f5f9;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-hover);
-      border-color: transparent;
-    }
-
-    /* Top Border Gradient on Hover */
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--gradient);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
-    }
-
-    .service-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .service-icon {
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 16px;
-      transition: all 0.3s;
-    }
-
-    .service-card h3 {
-      margin-bottom: 0.8rem;
-      font-size: 1.35rem;
-    }
-
-    .service-card p {
-      font-size: 1rem;
-      color: var(--text-light);
-      flex-grow: 1;
-    }
-
-    /* --- Portfolio (CSS Generated Graphics) --- */
-    .portfolio-section {
-      background: var(--bg-soft);
-      position: relative;
-    }
-
-    /* Subtle grid pattern for technical feel */
-    .portfolio-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-      background-size: 30px 30px;
-      opacity: 0.3;
-      pointer-events: none;
-    }
-
-    .project-card {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 5rem;
-      align-items: center;
-      margin-bottom: 8rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .project-card.reversed {
-      grid-template-columns: 1fr 1.2fr;
-      direction: rtl;
-    }
-
-    .project-card.reversed .project-content {
-      direction: ltr;
-    }
-
-    .project-visual {
-      height: 450px;
-      background: white;
-      border-radius: 24px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid #e2e8f0;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* --- CSS ART: Dashboard (Maker's Ledger) --- */
-    .css-dashboard {
-      width: 85%;
-      height: 75%;
-      background: #fff;
-      display: flex;
-      border-radius: 12px;
-      border: 1px solid #eee;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
-      overflow: hidden;
-    }
-
-    .dash-side {
-      width: 20%;
-      background: #f8fafc;
-      border-right: 1px solid #eee;
-      padding: 20px 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .dash-pill {
-      height: 8px;
-      background: #e2e8f0;
-      border-radius: 4px;
+      color: var(--text-main);
+      min-height: 150px;
+      display: block;
       width: 100%;
     }
 
-    .dash-main {
-      flex: 1;
-      padding: 25px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+    .typewriter-cursor {
+      display: inline-block;
+      width: 4px;
+      background-color: var(--accent);
+      animation: blink 1s step-end infinite;
+      margin-left: 5px;
+      height: 0.9em;
+      vertical-align: middle;
     }
 
-    .dash-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .dash-avatar {
-      width: 24px;
-      height: 24px;
-      background: #e2e8f0;
-      border-radius: 50%;
-    }
-
-    .dash-cards {
-      display: flex;
-      gap: 15px;
-    }
-
-    .dash-card {
-      flex: 1;
-      height: 80px;
-      background: linear-gradient(135deg, #f8fafc, #fff);
-      border: 1px solid #eee;
-      border-radius: 8px;
-    }
-
-    .dash-chart {
-      flex: 1;
-      border: 1px solid #eee;
-      border-radius: 8px;
-      padding: 15px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-around;
-      gap: 8px;
-      position: relative;
-    }
-
-    /* Animated Bars */
-    .d-bar {
-      width: 12%;
-      background: var(--primary);
-      border-radius: 4px 4px 0 0;
-      opacity: 0.8;
-      animation: growBar 2s ease-out forwards;
-      transform-origin: bottom;
-    }
-
-    @keyframes growBar {
-      from {
-        transform: scaleY(0);
-      }
-
-      to {
-        transform: scaleY(1);
-      }
-    }
-
-    /* --- CSS ART: Map (Adeffi) --- */
-    .css-map {
-      width: 100%;
-      height: 100%;
-      background: #f1f5f9;
-      position: relative;
-    }
-
-    .map-grid {
-      width: 100%;
-      height: 100%;
-      background-image: linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
-      background-size: 40px 40px;
-      opacity: 0.5;
-    }
-
-    /* Pins */
-    .map-pin {
-      position: absolute;
-      width: 24px;
-      height: 24px;
-      background: var(--accent);
-      border-radius: 50% 50% 0 50%;
-      transform: rotate(45deg);
-      border: 3px solid white;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-      z-index: 2;
-      animation: floatPin 3s infinite ease-in-out;
-    }
-
-    .pin-1 {
-      top: 40%;
-      left: 50%;
-    }
-
-    .pin-2 {
-      top: 65%;
-      left: 30%;
-      animation-delay: 0.5s;
-      background: var(--primary);
-    }
-
-    .pin-3 {
-      top: 25%;
-      left: 70%;
-      animation-delay: 1s;
-      background: var(--teal);
-    }
-
-    @keyframes floatPin {
-
-      0%,
-      100% {
-        transform: rotate(45deg) translateY(0);
-      }
-
+    @keyframes blink {
       50% {
-        transform: rotate(45deg) translateY(-10px);
-      }
-    }
-
-    /* Pulse Effect */
-    .map-pulse {
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--accent);
-      transform: translate(-0%, -0%);
-      animation: pulse 2s infinite;
-      opacity: 0;
-      z-index: 1;
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-        opacity: 0.6;
-      }
-
-      100% {
-        transform: scale(4);
         opacity: 0;
       }
     }
 
-    /* UI Element on Map */
-    .map-ui {
-      position: absolute;
-      bottom: 30px;
-      right: 30px;
-      width: 160px;
-      height: 60px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      padding: 12px;
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .project-content h3 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .project-content p {
-      color: var(--text-light);
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-    }
-
-    .tech-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 700px;
       margin-bottom: 2.5rem;
     }
 
-    .tech-tag {
+    /* --- BENTO GRID --- */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 3rem;
+    }
+
+    .bento-card {
       background: white;
-      border: 1px solid #e2e8f0;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
+      border-radius: 16px;
+      padding: 1.8rem;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 260px;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    }
+
+    .bento-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.08);
+      border-color: rgba(79, 70, 229, 0.2);
+    }
+
+    .bento-card.span-2 {
+      grid-column: span 2;
+    }
+
+    .bento-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .bento-desc {
       font-size: 0.9rem;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 2;
+      line-height: 1.5;
+    }
+
+    .bento-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .vis-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.4;
+      transition: transform 0.5s ease;
+    }
+
+    .bento-card:hover .vis-bg {
+      transform: scale(1.05);
+    }
+
+    /* --- PROJECT CARDS (Fixed & Robust) --- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      position: relative;
+      height: 450px;
+      background: white;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
+      border-color: rgba(79, 70, 229, 0.2);
+    }
+
+    /* 3D Visual Area (Top 55%) */
+    .card-visual {
+      height: 55%;
+      width: 100%;
+      position: relative;
+      background: #000;
+      /* Fallback */
+      overflow: hidden;
+    }
+
+    .card-visual canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover canvas {
+      transform: scale(1.05);
+    }
+
+    /* Content Area (Bottom 45%) */
+    .card-content-wrapper {
+      height: 45%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: white;
+      z-index: 2;
+      /* Ensures text is on top */
+      position: relative;
+    }
+
+    .card-content {
+      padding: 1.2rem;
+      flex-grow: 1;
+    }
+
+    .card-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-footer {
+      height: 40px;
+      /* Fixed footer height */
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .marquee-mask {
+      width: 100%;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      width: max-content;
+      animation: scrollText 15s linear infinite;
+    }
+
+    .tech-item {
+      font-size: 0.75rem;
       font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    @keyframes scrollText {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* --- IMPROVED PROCESS SECTION --- */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      position: relative;
+      margin-top: 4rem;
+    }
+
+    .process-line-bg {
+      position: absolute;
+      top: 40px;
+      left: 50px;
+      right: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #e0e7ff 0%, #fbcfe8 100%);
+      z-index: 0;
+      border-radius: 4px;
+    }
+
+    .process-card {
+      position: relative;
+      background: white;
+      border: 1px solid #f1f5f9;
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      z-index: 1;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .process-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+      border-color: rgba(79, 70, 229, 0.2);
+    }
+
+    .process-icon-wrapper {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1.5rem;
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--primary);
+      box-shadow: 0 0 0 8px white;
+      transition: all 0.3s ease;
+    }
+
+    .process-card:hover .process-icon-wrapper {
+      border-color: transparent;
+      background: var(--gradient-text);
+      color: white;
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .process-watermark {
+      position: absolute;
+      top: -15px;
+      right: -10px;
+      font-size: 6rem;
+      font-weight: 800;
+      color: #f1f5f9;
+      z-index: -1;
+      line-height: 1;
+      transition: all 0.3s ease;
+    }
+
+    .process-card:hover .process-watermark {
+      color: #eef2ff;
+      transform: scale(1.1);
+    }
+
+    .process-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
       color: var(--text-main);
     }
 
+    .process-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
     /* --- Contact --- */
-    .contact-box {
-      background: var(--text-main);
-      color: white;
-      border-radius: 24px;
-      padding: 6rem 2rem;
+    .contact-wrapper {
       text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      background: radial-gradient(circle at center, #f8fafc 0%, #ffffff 100%);
+      border-radius: 24px;
+      padding: 4rem 2rem;
+      border: 1px solid #e2e8f0;
     }
 
-    .contact-box h2 {
-      color: white;
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
+    .email-display {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 1.5rem 0;
+      display: block;
+      transition: color 0.3s;
     }
 
-    .mail-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.5rem;
-      color: #fff;
-      text-decoration: none;
-      padding-bottom: 5px;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-      transition: all 0.3s;
-      margin-top: 1rem;
-    }
-
-    .mail-link:hover {
+    .email-display:hover {
       color: var(--primary);
-      border-color: var(--primary);
-      padding-bottom: 8px;
     }
 
-    /* --- Mobile --- */
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
+    /* Mobile */
     @media (max-width: 1024px) {
-
-      .project-card,
-      .project-card.reversed {
-        grid-template-columns: 1fr;
-        direction: ltr;
-        gap: 3rem;
-        margin-bottom: 6rem;
-      }
-
-      .project-visual {
-        height: 350px;
-      }
-
-      .services-grid {
+      .bento-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero h1 {
-        font-size: 3.5rem;
+      .bento-card.span-2 {
+        grid-column: auto;
       }
-    }
 
-    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .process-line-bg {
+        width: 4px;
+        height: 100%;
+        top: 0;
+        left: 40px;
+        right: auto;
+        background: linear-gradient(to bottom, #e0e7ff 0%, #fbcfe8 100%);
+      }
+
+      .process-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 1.5rem;
+      }
+
+      .process-icon-wrapper {
+        width: 50px;
+        height: 50px;
+        font-size: 1rem;
+        margin-bottom: 0;
+        flex-shrink: 0;
+        box-shadow: none;
+      }
+
+      .process-watermark {
+        display: none;
+      }
+
       .nav-links {
         display: none;
       }
 
-      .mobile-menu-btn {
-        display: block;
-      }
-
-      .section-padding {
-        padding: 5rem 0;
-      }
-
-      .contact-box {
-        padding: 4rem 1.5rem;
-      }
-
-      .contact-box h2 {
-        font-size: 2.2rem;
-      }
-
-      .mail-link {
-        font-size: 1.2rem;
+      .hero {
+        text-align: left;
+        padding-top: 100px;
       }
     }
   </style>
@@ -700,40 +685,51 @@
 
 <body>
 
+  <div class="aurora-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
   <header>
     <div class="container">
       <nav>
         <a href="#" class="logo">
-          <i class="fas fa-layer-group" style="color: var(--primary);"></i> Olik Lab
+          <i class="fas fa-layer-group" style="color: var(--primary);"></i> Olik Lab.
         </a>
         <ul class="nav-links">
           <li><a href="#capabilities">Capabilities</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#portfolio">Projects</a></li>
+          <li><a href="#process">Process</a></li>
         </ul>
-        <a href="#contact" class="btn btn-primary">Book a Call</a>
-        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        <a href="#contact" class="btn btn-primary">Ready to Build</a>
       </nav>
     </div>
   </header>
 
   <section class="hero">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
     <div class="container">
-      <div class="hero-content reveal active">
-        <div class="badge">Product-First Engineering</div>
+      <div class="hero-content">
+        <div class="hero-tags-wrapper">
+          <div class="tag-pill tag-green">
+            <i class="fas fa-check-circle"></i> Product-First Engineering
+          </div>
+          <div class="tag-pill tag-blue">
+            <i class="fas fa-chart-line"></i> Proven Scale
+          </div>
+        </div>
+
         <h1>
-          We Build Software <br>
-          That <span class="gradient-text">Actually Works.</span>
+          We build solutions for<br>
+          <span id="typewriter" class="gradient-text"></span><span class="typewriter-cursor"></span>
         </h1>
         <p>
-          Olik Lab is an elite offshore collective. We specialize in Generative AI, Game Development, Cloud
-          Infrastructure, and deploying vetted product teams.
+          We partner with ambitious organizations to architect, build, and scale
+          bespoke digital solutions using ready to deliver top 10% talent.
         </p>
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
-          <a href="#capabilities" class="btn btn-outline">Our Capabilities</a>
+          <a href="#portfolio" class="btn btn-primary">View Case Studies</a>
+          <a href="#capabilities" class="btn btn-outline">Our Expertise</a>
         </div>
       </div>
     </div>
@@ -741,252 +737,478 @@
 
   <section id="capabilities" class="section-padding">
     <div class="container">
-      <div class="reveal">
-        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Capabilities</h2>
-        <p style="color: var(--text-light); max-width: 600px;">From strategic discovery to high-scale deployment. Our
-          technical foundation lets your business scale without limits.</p>
+      <div style="margin-bottom: 3rem;">
+        <h2 style="font-size: 2.5rem;">Technical Capabilities</h2>
+        <p style="color: var(--text-muted); max-width: 600px;">Engineering excellence across the full stack. We turn
+          complex requirements into robust, scalable software.</p>
       </div>
 
-      <div class="services-grid">
-        <div class="service-card reveal">
-          <div class="service-icon" style="background: #eff6ff; color: var(--primary);"><i class="fas fa-compass"></i>
+      <div class="bento-grid">
+        <div class="bento-card span-2">
+          <div class="vis-bg" style="background: radial-gradient(circle at right bottom, #e0e7ff, transparent 60%);">
           </div>
-          <h3>Product Strategy & Discovery</h3>
-          <p>We ensure product-market fit before writing code. We conduct market analysis, user validation, and roadmap
-            planning to solve the right problems.</p>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-icon" style="background: #fdf2f8; color: var(--accent);"><i class="fas fa-gamepad"></i>
+          <div class="bento-icon" style="background: #eff6ff; color: var(--primary);"><i class="fas fa-brain"></i></div>
+          <div>
+            <div class="bento-title">Enterprise AI & LLM</div>
+            <div class="bento-desc">Beyond simple wrappers. We engineer Semantic Search, RAG Architectures, and
+              Autonomous Agents that drive verifiable business value.</div>
           </div>
-          <h3>Game Design & Development</h3>
-          <p>Immersive experiences built on Unity and Unreal. From mobile 2D games to complex 3D environments, we handle
-            mechanics, assets, and multiplayer logic.</p>
         </div>
 
-        <div class="service-card reveal">
-          <div class="service-icon" style="background: #f5f3ff; color: #7c3aed;"><i class="fas fa-brain"></i></div>
-          <h3>AI & LLM Solutions</h3>
-          <p>Move beyond hype. We build custom RAG pipelines, fine-tune models, and deploy intelligent agents that
-            automate real business workflows.</p>
+        <div class="bento-card">
+          <div class="vis-bg" style="background: radial-gradient(circle at right top, #fae8ff, transparent 50%);"></div>
+          <div class="bento-icon" style="background: #fdf2f8; color: var(--accent);"><i class="fas fa-users"></i></div>
+          <div>
+            <div class="bento-title">Staff Augmentation</div>
+            <div class="bento-desc">Dedicated High-velocity squads calibrated to your tech stack, tailored to your need.
+              Integrated in 2 weeks.
+            </div>
+          </div>
         </div>
 
-        <div class="service-card reveal">
-          <div class="service-icon" style="background: #ecfeff; color: var(--teal);"><i class="fas fa-cloud"></i></div>
-          <h3>Cloud & Infrastructure</h3>
-          <p>GCP, AWS or Azure experts. We build self-healing Kubernetes clusters, robust CI/CD pipelines, and secure
-            infrastructure that scales cost-effectively.</p>
+        <div class="bento-card">
+          <div class="bento-icon" style="background: #f0fdf4; color: var(--green);"><i class="fas fa-mobile-alt"></i>
+          </div>
+          <div>
+            <div class="bento-title">Web & Mobile Application</div>
+            <div class="bento-desc">Performant Web and Mobile application built for scale and high-concurrency.</div>
+          </div>
         </div>
 
-        <div class="service-card reveal">
-          <div class="service-icon" style="background: #f0fdf4; color: #16a34a;"><i class="fas fa-server"></i></div>
-          <h3>Service Development</h3>
-          <p>High-performance backends and microservices. We architect secure APIs and handle complex data migrations
-            for mission-critical applications.</p>
+        <div class="bento-card span-2">
+          <div class="vis-bg" style="background: radial-gradient(circle at left bottom, #ecfeff, transparent 60%);">
+          </div>
+          <div class="bento-icon" style="background: #ecfeff; color: var(--teal);"><i class="fas fa-cloud"></i></div>
+          <div>
+            <div class="bento-title">Cloud-Native Infrastructure</div>
+            <div class="bento-desc">Cloud Integration, Cloud Scaling, Kubernetes Orchestration, Multi-Cloud Strategies
+              (AWS/GCP), and Serverless implementations designed for 99.99% uptime.</div>
+          </div>
         </div>
 
-        <div class="service-card reveal">
-          <div class="service-icon" style="background: #fff7ed; color: #ea580c;"><i class="fas fa-users"></i></div>
-          <h3>Vetted Product Teams</h3>
-          <p>Skip the hiring nightmare. We provide ready-to-deploy squads (Devs + QA + PM) that integrate into your
-            workflow within 2 weeks.</p>
+        <div class="bento-card span-2">
+          <div class="vis-bg" style="background: radial-gradient(circle at left bottom, #f3f4f6, transparent 60%);">
+          </div>
+          <div class="bento-icon" style="background: #f1f5f9; color: #475569;"><i class="fas fa-code"></i></div>
+          <div>
+            <div class="bento-title">Bespoke Software</div>
+            <div class="bento-desc">Tailored backend systems, microservices, and legacy modernization. Clean,
+              maintainable code.</div>
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <div class="bento-icon" style="background: #fff1f2; color: #e11d48;"><i class="fas fa-gamepad"></i></div>
+          <div>
+            <div class="bento-title">Game Development</div>
+            <div class="bento-desc">Unity & Unreal Engine development for immersive gaming and simulation.</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="portfolio" class="portfolio-section section-padding">
+  <section id="portfolio" class="section-padding" style="background: #fff;">
     <div class="container">
-      <div class="reveal" style="margin-bottom: 5rem;">
-        <h2 style="font-size: 2.5rem;">Selected Work</h2>
-        <p style="color: var(--text-light);">Real products we've engineered and scaled.</p>
-      </div>
+      <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Selected Case Studies</h2>
+      <p style="color: var(--text-muted); margin-bottom: 4rem;">A track record of scalability, performance, and
+        user-centric design.</p>
 
-      <div class="project-card reveal">
-        <div class="project-visual">
-          <div class="css-dashboard">
-            <div class="dash-side">
-              <div class="dash-pill" style="width: 60%;"></div>
-              <div class="dash-pill"></div>
-              <div class="dash-pill"></div>
+      <div class="projects-grid">
+
+        <a href="https://makersledger.com" class="project-card">
+          <div class="card-visual" id="canvas-fintech"></div>
+
+          <div class="card-content-wrapper">
+            <div class="card-content">
+              <span class="card-tag">Fintech SaaS</span>
+              <h3 class="card-title">Maker's Ledger</h3>
+              <p class="card-desc">
+                Financial operating system for the creator economy handling real-time transaction processing.
+              </p>
             </div>
-            <div class="dash-main">
-              <div class="dash-head">
-                <div class="dash-pill" style="width: 100px;"></div>
-                <div class="dash-avatar"></div>
+            <div class="card-footer">
+              <div class="marquee-mask">
+                <div class="marquee-track">
+                  <span class="tech-item"><i class="fab fa-react"></i> React</span>
+                  <span class="tech-item"><i class="fab fa-node-js"></i> Next.js</span>
+                  <span class="tech-item"><i class="fas fa-database"></i> Supabase</span>
+                  <span class="tech-item"><i class="fas fa-bolt"></i> Redis</span>
+                  <span class="tech-item"><i class="fab fa-stripe"></i> Stripe</span>
+                  <span class="tech-item"><i class="fab fa-react"></i> React</span>
+                  <span class="tech-item"><i class="fab fa-node-js"></i> Next.js</span>
+                  <span class="tech-item"><i class="fas fa-database"></i> Supabase</span>
+                  <span class="tech-item"><i class="fas fa-bolt"></i> Redis</span>
+                  <span class="tech-item"><i class="fab fa-stripe"></i> Stripe</span>
+                </div>
               </div>
-              <div class="dash-cards">
-                <div class="dash-card"></div>
-                <div class="dash-card"></div>
-              </div>
-              <div class="dash-chart">
-                <div class="d-bar" style="height: 40%;"></div>
-                <div class="d-bar" style="height: 70%; animation-delay: 0.1s;"></div>
-                <div class="d-bar" style="height: 50%; animation-delay: 0.2s;"></div>
-                <div class="d-bar" style="height: 90%; animation-delay: 0.3s;"></div>
-                <div class="d-bar" style="height: 60%; animation-delay: 0.4s;"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="project-content">
-          <div class="badge">SaaS Platform</div>
-          <h3>Maker's Ledger</h3>
-          <p>A comprehensive financial tracking and project management suite tailored for creative professionals. We
-            handled full-stack development, payment integration, and real-time analytics dashboards.</p>
-
-          <div class="tech-stack">
-            <span class="tech-tag">React</span>
-            <span class="tech-tag">Node.js</span>
-            <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">Stripe</span>
-          </div>
-
-          <a href="https://makersledger.com" target="_blank" class="btn btn-primary">
-            Visit Live Site <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="project-card reversed reveal">
-        <div class="project-visual">
-          <div class="css-map">
-            <div class="map-grid"></div>
-            <div class="map-pulse"></div>
-            <div class="map-pin pin-1"></div>
-            <div class="map-pin pin-2"></div>
-            <div class="map-pin pin-3"></div>
-            <div class="map-ui">
-              <div class="dash-pill" style="width: 80%; background: #cbd5e1;"></div>
-              <div class="dash-pill" style="width: 50%; background: var(--accent); opacity: 0.5;"></div>
             </div>
           </div>
-        </div>
-        <div class="project-content">
-          <div class="badge">AdTech Platform</div>
-          <h3>Adeffi BD</h3>
-          <p>A revolutionary Out-Of-Home (OOH) advertising platform. We built a geolocation-based booking system
-            allowing advertisers to find, book, and track billboard campaigns in real-time.</p>
+        </a>
 
-          <div class="tech-stack">
-            <span class="tech-tag">Vue.js</span>
-            <span class="tech-tag">Laravel</span>
-            <span class="tech-tag">Google Maps API</span>
-            <span class="tech-tag">Analytics</span>
+        <a href="https://adeffitech.com/" class="project-card">
+          <div class="card-visual" id="canvas-adtech"></div>
+
+          <div class="card-content-wrapper">
+            <div class="card-content">
+              <span class="card-tag" style="color: var(--accent);">AdTech Platform</span>
+              <h3 class="card-title">Adeffi BD</h3>
+              <p class="card-desc">
+                Geospatial advertising engine for visualizing and booking OOH inventory in real-time.
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="marquee-mask">
+                <div class="marquee-track">
+                  <span class="tech-item"><i class="fab fa-vuejs"></i> Vue.js</span>
+                  <span class="tech-item"><i class="fab fa-laravel"></i> Golang</span>
+                  <span class="tech-item"><i class="fas fa-map-marked"></i> Google Maps</span>
+                  <span class="tech-item"><i class="fab fa-vuejs"></i> Vue.js</span>
+                  <span class="tech-item"><i class="fab fa-laravel"></i> Golang</span>
+                  <span class="tech-item"><i class="fas fa-map-marked"></i> Google Maps</span>
+                </div>
+              </div>
+            </div>
           </div>
+        </a>
 
-          <a href="https://adeffi.com" target="_blank" class="btn btn-primary">
-            Visit Live Site <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i>
-          </a>
-        </div>
+        <a href="#" class="project-card">
+          <div class="card-visual" id="canvas-cloud"></div>
+
+          <div class="card-content-wrapper">
+            <div class="card-content">
+              <span class="card-tag" style="color: var(--teal);">Cross Platform Mobile Application</span>
+              <h3 class="card-title">TrackMate</h3>
+              <p class="card-desc">
+                Track Everyday aspect of your life in one place.
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="marquee-mask">
+                <div class="marquee-track">
+                  <span class="tech-item"><i class="fab fa-aws"></i> Flutter</span>
+                  <span class="tech-item"><i class="fas fa-code"></i> Firebase</span>
+                  <span class="tech-item"><i class="fab fa-docker"></i> Docker</span>
+                  <span class="tech-item"><i class="fab fa-aws"></i> Flutter</span>
+                  <span class="tech-item"><i class="fas fa-code"></i> Firebase</span>
+                  <span class="tech-item"><i class="fab fa-docker"></i> Docker</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+
       </div>
     </div>
   </section>
 
-  <section id="teams" class="section-padding" style="background: white;">
+  <section id="process" class="section-padding">
     <div class="container">
-      <div class="reveal" style="text-align: center; max-width: 700px; margin: 0 auto 4rem auto;">
-        <h2>Engineering Powerhouse</h2>
-        <p style="color: var(--text-light); margin-top: 1rem;">
-          We operate as an extension of your internal team. High availability, fluent communication, and product-focused
-          mindsets.
+      <div style="text-align: center; max-width: 700px; margin: 0 auto 3rem auto;">
+        <h2 style="font-size: 2.5rem;">Operational Framework</h2>
+        <p style="color: var(--text-muted);">A systematic approach to engineering delivery.</p>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-line-bg"></div>
+
+        <div class="process-card">
+          <div class="process-watermark">01</div>
+          <div class="process-icon-wrapper">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3 class="process-title">Technical Discovery</h3>
+          <p class="process-desc">We deconstruct your requirements, audit legacy systems, and define the target
+            architecture.</p>
+        </div>
+
+        <div class="process-card">
+          <div class="process-watermark">02</div>
+          <div class="process-icon-wrapper">
+            <i class="fas fa-sliders-h"></i>
+          </div>
+          <h3 class="process-title">Talent Calibration</h3>
+          <p class="process-desc">We deploy domain experts specifically matched to tech stack and company culture.
+          </p>
+        </div>
+
+        <div class="process-card">
+          <div class="process-watermark">03</div>
+          <div class="process-icon-wrapper">
+            <i class="fas fa-code-branch"></i>
+          </div>
+          <h3 class="process-title">Agile Execution</h3>
+          <p class="process-desc">Rapid iterative development loops with CI/CD integration and stakeholder demos.
+          </p>
+        </div>
+
+        <div class="process-card">
+          <div class="process-watermark">04</div>
+          <div class="process-icon-wrapper">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <h3 class="process-title">Delivery & Maintenance</h3>
+          <p class="process-desc">Comprehensive documentation, knowledge transfer, and post-deployment scaling support.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding: 0 0 4rem 0;">
+    <div class="container">
+      <div class="contact-wrapper">
+        <h2 style="font-size: 2.5rem;">Ready to Build?</h2>
+        <p style="opacity: 0.8; margin-top: 0.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+          Discuss your requirements with our team.
         </p>
-      </div>
 
-      <div class="services-grid reveal"
-        style="margin-top: 0; text-align: center; border-top: 1px solid #f1f5f9; padding-top: 3rem;">
-        <div>
-          <div class="gradient-text" style="font-size: 3.5rem; font-weight: 800; line-height: 1;">Top 5%</div>
-          <p style="color: var(--text-light); margin-top: 0.5rem;">Talent Acceptance Rate</p>
-        </div>
-        <div>
-          <div class="gradient-text" style="font-size: 3.5rem; font-weight: 800; line-height: 1;">2 Wks</div>
-          <p style="color: var(--text-light); margin-top: 0.5rem;">Avg. Deployment Time</p>
-        </div>
-        <div>
-          <div class="gradient-text" style="font-size: 3.5rem; font-weight: 800; line-height: 1;">100%</div>
-          <p style="color: var(--text-light); margin-top: 0.5rem;">Client Retention</p>
-        </div>
+        <a href="mailto:hello@oliklab.com" class="email-display">
+          hello@oliklab.com
+        </a>
+
       </div>
     </div>
   </section>
 
-  <section id="contact" class="section-padding">
-    <div class="container">
-      <div class="contact-box reveal">
-        <h2>Ready to Scale?</h2>
-        <p style="max-width: 600px; margin: 0 auto 2rem auto; opacity: 0.9;">
-          Whether you need a single AI expert, a Unity developer, or a full product squad, we are ready to start.
-        </p>
-        <div style="margin-top: 2.5rem;">
-          <p style="color: rgba(255,255,255,0.7); font-size: 1rem; margin-bottom: 0.5rem;">Email us directly at</p>
-          <a href="mailto:hello@oliklab.com" class="mail-link">
-            hello@oliklab.com <i class="fas fa-arrow-right" style="font-size: 1.2rem; transform: rotate(-45deg);"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer style="padding: 3rem 0; background: white; border-top: 1px solid #f1f5f9;">
+  <footer>
     <div class="container"
-      style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-      <div class="logo" style="font-size: 1.2rem;">Olik Lab.</div>
-      <div style="color: var(--text-light); font-size: 0.9rem;">
-        &copy; 2025 Olik Lab. All rights reserved.
+      style="display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem; padding-top: 2rem; border-top: 1px solid #f1f5f9;">
+      <div>&copy; 2025 Olik Lab. All rights reserved.</div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="#">LinkedIn</a>
+        <a href="https://github.com/oliklab">Github</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // Scroll Animation Observer
-    const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) { entry.target.classList.add('active'); }
-      });
-    }, observerOptions);
-    document.querySelectorAll('.reveal').forEach(el => { observer.observe(el); });
+    // --- Typewriter Effect ---
+    const words = ["AI & LLM.", "Web & Mobile Apps.", "Cloud Infrastructure.", "Bespoke Software.", "Immersive Games."];
+    let i = 0;
+    let timer;
 
-    // Header Scrolled State
+    function typeWriter() {
+      const heading = document.getElementById("typewriter");
+      const word = words[i];
+      let j = 0;
+      let isDeleting = false;
+
+      function loop() {
+        heading.innerHTML = word.substring(0, j);
+        if (!isDeleting && j < word.length) {
+          j++; timer = setTimeout(loop, 100);
+        } else if (isDeleting && j > 0) {
+          j--; timer = setTimeout(loop, 50);
+        } else {
+          isDeleting = !isDeleting;
+          if (!isDeleting) { i = (i + 1) % words.length; timer = setTimeout(typeWriter, 500); return; }
+          timer = setTimeout(loop, 2000);
+        }
+      }
+      loop();
+    }
+
+    // --- Three.js Animations ---
+    function initThreeJS() {
+
+      // 1. FINTECH (Golden Cube)
+      function initFintech() {
+        const container = document.getElementById('canvas-fintech');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1e1b4b); // Dark Blue
+        const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.z = 5;
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        container.appendChild(renderer.domElement);
+
+        // Lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0xffd700, 1);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+
+        // Gold Cube (Icosahedron for crystal look)
+        const geometry = new THREE.IcosahedronGeometry(1.2, 0);
+        const material = new THREE.MeshStandardMaterial({
+          color: 0xffd700,
+          metalness: 0.9,
+          roughness: 0.1,
+          wireframe: true
+        });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        // Orbiting Particles
+        const particles = new THREE.Group();
+        const pGeo = new THREE.SphereGeometry(0.1, 8, 8);
+        const pMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        for (let i = 0; i < 10; i++) {
+          const mesh = new THREE.Mesh(pGeo, pMat);
+          mesh.position.set(
+            (Math.random() - 0.5) * 4,
+            (Math.random() - 0.5) * 4,
+            (Math.random() - 0.5) * 4
+          );
+          particles.add(mesh);
+        }
+        scene.add(particles);
+
+        function animate() {
+          requestAnimationFrame(animate);
+          cube.rotation.x += 0.005;
+          cube.rotation.y += 0.01;
+          particles.rotation.y -= 0.005;
+          renderer.render(scene, camera);
+        }
+        animate();
+      }
+
+      // 2. ADTECH (Pastel City)
+      function initAdTech() {
+        const container = document.getElementById('canvas-adtech');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xfff7ed); // Pastel Orange/White
+
+        // Isometric Camera
+        const aspect = container.clientWidth / container.clientHeight;
+        const d = 4;
+        const camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 1, 1000);
+        camera.position.set(20, 20, 20);
+        camera.lookAt(scene.position);
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        container.appendChild(renderer.domElement);
+
+        // Light
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+        dirLight.position.set(10, 20, 10);
+        scene.add(dirLight);
+        scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+
+        // City Group
+        const city = new THREE.Group();
+
+        // Ground
+        const planeGeo = new THREE.PlaneGeometry(10, 10);
+        const planeMat = new THREE.MeshBasicMaterial({ color: 0xe5e7eb });
+        const plane = new THREE.Mesh(planeGeo, planeMat);
+        plane.rotation.x = -Math.PI / 2;
+        city.add(plane);
+
+        // Buildings
+        const bGeo = new THREE.BoxGeometry(1, 1, 1);
+        const bMat1 = new THREE.MeshStandardMaterial({ color: 0xfca5a5 }); // Pastel Red
+        const bMat2 = new THREE.MeshStandardMaterial({ color: 0x93c5fd }); // Pastel Blue
+
+        const b1 = new THREE.Mesh(bGeo, bMat1);
+        b1.position.set(-1, 0.5, -1);
+        b1.scale.y = 2;
+        city.add(b1);
+
+        const b2 = new THREE.Mesh(bGeo, bMat2);
+        b2.position.set(1, 0.75, 0.5);
+        b2.scale.y = 1.5;
+        city.add(b2);
+
+        // Car
+        const carGeo = new THREE.BoxGeometry(0.4, 0.2, 0.6);
+        const carMat = new THREE.MeshStandardMaterial({ color: 0x86efac });
+        const car = new THREE.Mesh(carGeo, carMat);
+        car.position.set(0, 0.1, 2);
+        city.add(car);
+
+        scene.add(city);
+
+        let carSpeed = 0.02;
+        function animate() {
+          requestAnimationFrame(animate);
+          // Rotate entire city slowly
+          city.rotation.y += 0.002;
+
+          // Move car
+          car.position.z -= carSpeed;
+          if (car.position.z < -4) car.position.z = 4;
+
+          renderer.render(scene, camera);
+        }
+        animate();
+      }
+
+      // 3. CLOUD (Floating Shapes)
+      function initCloud() {
+        const container = document.getElementById('canvas-cloud');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0f172a); // Dark Slate
+        const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.z = 6;
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        container.appendChild(renderer.domElement);
+
+        const light = new THREE.PointLight(0x06b6d4, 2, 50);
+        light.position.set(2, 2, 2);
+        scene.add(light);
+        scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+
+        // Floating Phone Shape
+        const geo = new THREE.BoxGeometry(1.5, 3, 0.2);
+        const mat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.2 });
+        const phone = new THREE.Mesh(geo, mat);
+        scene.add(phone);
+
+        // Screen
+        const screenGeo = new THREE.PlaneGeometry(1.3, 2.8);
+        const screenMat = new THREE.MeshBasicMaterial({ color: 0x0ea5e9 });
+        const screen = new THREE.Mesh(screenGeo, screenMat);
+        screen.position.z = 0.11;
+        phone.add(screen);
+
+        // Floating Clouds
+        const cGeo = new THREE.SphereGeometry(0.4, 16, 16);
+        const cMat = new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 });
+
+        const cloud1 = new THREE.Mesh(cGeo, cMat);
+        cloud1.position.set(2, 1, -1);
+        scene.add(cloud1);
+
+        const cloud2 = new THREE.Mesh(cGeo, cMat);
+        cloud2.position.set(-2, -1, 1);
+        scene.add(cloud2);
+
+        function animate() {
+          requestAnimationFrame(animate);
+          phone.rotation.y = Math.sin(Date.now() * 0.001) * 0.2;
+          phone.position.y = Math.sin(Date.now() * 0.002) * 0.2;
+
+          cloud1.position.x = Math.sin(Date.now() * 0.001) * 2.5;
+          cloud2.position.x = Math.cos(Date.now() * 0.001) * 2.5;
+
+          renderer.render(scene, camera);
+        }
+        animate();
+      }
+
+      // Initialize all
+      initFintech();
+      initAdTech();
+      initCloud();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      typeWriter();
+      initThreeJS();
+    });
+
+    // --- Header Scroll State ---
     window.addEventListener('scroll', () => {
       const header = document.querySelector('header');
       if (window.scrollY > 50) header.classList.add('scrolled');
       else header.classList.remove('scrolled');
-    });
-
-    // Smooth Scroll for Anchors
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          window.scrollTo({
-            top: target.offsetTop - 80,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-
-    // Mobile Menu
-    const menuBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
-
-    menuBtn.addEventListener('click', () => {
-      if (navLinks.style.display === 'flex') {
-        navLinks.style.display = 'none';
-      } else {
-        navLinks.style.display = 'flex';
-        navLinks.style.flexDirection = 'column';
-        navLinks.style.position = 'absolute';
-        navLinks.style.top = '100%';
-        navLinks.style.left = '0';
-        navLinks.style.width = '100%';
-        navLinks.style.background = 'white';
-        navLinks.style.padding = '2rem';
-        navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
-      }
     });
   </script>
 </body>
