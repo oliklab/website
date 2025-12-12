@@ -20,18 +20,31 @@
 
   <style>
     :root {
+      /* Palette Update: Cleaner, cooler, more professional */
       --bg-body: #ffffff;
-      --bg-soft: #f8fafc;
+      --bg-soft: #f1f5f9;
       --text-main: #0f172a;
-      --text-muted: #64748b;
-      --primary: #4f46e5;
-      --accent: #ec4899;
+      /* Slate 900 */
+      --text-muted: #475569;
+      /* Slate 600 */
+
+      /* Primary is now a sophisticated Indigo-Blue */
+      --primary: #3b82f6;
+
+      /* Accent is now Teal/Emerald (positive connotation) instead of Pink */
+      --accent: #10b981;
+
       --teal: #06b6d4;
-      --green: #10b981;
-      --gradient-text: linear-gradient(135deg, #4f46e5 0%, #ec4899 100%);
+      --indigo: #6366f1;
+
+      /* New Gradient: Blue to Teal (Fresh, Modern, Trustworthy) */
+      --gradient-text: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
+
       --font-display: 'Outfit', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
-      --card-radius: 16px;
+      --card-radius: 24px;
+      /* Slightly softer corners */
+      --container-width: 1140px;
     }
 
     * {
@@ -50,6 +63,7 @@
       color: var(--text-main);
       line-height: 1.6;
       overflow-x: hidden;
+      font-size: 16px;
     }
 
     h1,
@@ -58,7 +72,8 @@
     h4 {
       font-family: var(--font-display);
       font-weight: 700;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.025em;
+      color: var(--text-main);
     }
 
     a {
@@ -66,7 +81,7 @@
       color: inherit;
     }
 
-    /* --- Background Aurora Blobs --- */
+    /* --- Background Aurora Blobs (Subtler) --- */
     .aurora-bg {
       position: fixed;
       width: 100vw;
@@ -80,36 +95,41 @@
     .blob {
       position: absolute;
       border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.6;
-      animation: float 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+      filter: blur(100px);
+      /* More blur for smoothness */
+      opacity: 0.4;
+      /* Lower opacity for subtlety */
+      animation: float 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .blob-1 {
       top: -10%;
-      left: -10%;
-      width: 50vw;
-      height: 50vw;
-      background: #e0e7ff;
+      left: -5%;
+      width: 60vw;
+      height: 60vw;
+      background: #dbeafe;
+      /* Light Blue */
     }
 
     .blob-2 {
       bottom: -10%;
       right: -10%;
-      width: 40vw;
-      height: 40vw;
-      background: #fce7f3;
+      width: 50vw;
+      height: 50vw;
+      background: #ccfbf1;
+      /* Light Teal */
       animation-delay: -5s;
     }
 
     .blob-3 {
-      top: 40%;
-      left: 30%;
-      width: 30vw;
-      height: 30vw;
-      background: #ccfbf1;
+      top: 30%;
+      left: 20%;
+      width: 40vw;
+      height: 40vw;
+      background: #e0e7ff;
+      /* Indigo tint */
       animation-delay: -10s;
-      opacity: 0.4;
+      opacity: 0.3;
     }
 
     @keyframes float {
@@ -118,19 +138,19 @@
       }
 
       100% {
-        transform: translate(40px, -40px) scale(1.05);
+        transform: translate(30px, -30px) scale(1.05);
       }
     }
 
     /* --- Layout Utilities --- */
     .container {
-      max-width: 1100px;
+      max-width: var(--container-width);
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 0 1.5rem;
     }
 
     .section-padding {
-      padding: 6rem 0;
+      padding: 7rem 0;
     }
 
     .gradient-text {
@@ -146,16 +166,17 @@
       top: 0;
       width: 100%;
       z-index: 1000;
-      padding: 1.2rem 0;
+      padding: 1.5rem 0;
       transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.0);
+      /* Transparent start */
     }
 
     header.scrolled {
-      padding: 0.8rem 0;
+      padding: 1rem 0;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
     }
 
     nav {
@@ -165,24 +186,25 @@
     }
 
     .logo {
-      font-size: 1.4rem;
-      font-weight: 800;
+      font-size: 1.5rem;
+      font-weight: 700;
       color: var(--text-main);
       display: flex;
       align-items: center;
       gap: 0.6rem;
+      letter-spacing: -0.03em;
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
       list-style: none;
     }
 
     .nav-links a {
       font-weight: 500;
-      font-size: 0.9rem;
-      color: var(--text-main);
+      font-size: 0.95rem;
+      color: var(--text-muted);
       transition: color 0.2s;
     }
 
@@ -191,7 +213,7 @@
     }
 
     .btn {
-      padding: 0.7rem 1.8rem;
+      padding: 0.8rem 2rem;
       border-radius: 100px;
       font-weight: 600;
       font-size: 0.95rem;
@@ -206,24 +228,29 @@
     .btn-primary {
       background: var(--text-main);
       color: white;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
     }
 
     .btn-primary:hover {
       background: var(--primary);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+      box-shadow: 0 12px 24px rgba(59, 130, 246, 0.3);
     }
 
     .btn-outline {
-      background: white;
-      border: 1px solid #e2e8f0;
+      background: transparent;
+      border: 1px solid #cbd5e1;
       color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--text-main);
+      background: #f8fafc;
     }
 
     /* --- Hero Section --- */
     .hero {
-      min-height: 90vh;
+      min-height: 95vh;
       display: flex;
       align-items: center;
       padding-top: 80px;
@@ -234,55 +261,55 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      max-width: 850px;
     }
 
     .hero-tags-wrapper {
       display: flex;
       gap: 0.8rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       flex-wrap: wrap;
     }
 
     .tag-pill {
-      padding: 0.3rem 0.8rem;
+      padding: 0.4rem 1rem;
       border-radius: 50px;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
     }
 
-    .tag-green {
-      background: linear-gradient(90deg, rgba(209, 250, 229, 0.6) 0%, rgba(167, 243, 208, 0.4) 100%);
-      color: #065f46;
-      border-color: #a7f3d0;
+    .tag-green i {
+      color: var(--accent);
     }
 
-    .tag-blue {
-      background: linear-gradient(90deg, rgba(224, 231, 255, 0.6) 0%, rgba(199, 210, 254, 0.4) 100%);
-      color: #3730a3;
-      border-color: #c7d2fe;
+    .tag-blue i {
+      color: var(--primary);
     }
 
     .hero h1 {
-      font-size: clamp(3rem, 5vw, 4.5rem);
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
+      font-size: clamp(3.5rem, 5.5vw, 5rem);
+      line-height: 1.05;
+      margin-bottom: 2rem;
       color: var(--text-main);
-      min-height: 150px;
+      min-height: 160px;
+      /* Space for typewriter */
       display: block;
       width: 100%;
     }
 
     .typewriter-cursor {
       display: inline-block;
-      width: 4px;
-      background-color: var(--accent);
+      width: 3px;
+      background-color: var(--primary);
       animation: blink 1s step-end infinite;
-      margin-left: 5px;
+      margin-left: 2px;
       height: 0.9em;
       vertical-align: middle;
     }
@@ -294,39 +321,41 @@
     }
 
     .hero p {
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       color: var(--text-muted);
-      max-width: 700px;
-      margin-bottom: 2.5rem;
+      max-width: 650px;
+      margin-bottom: 3rem;
+      line-height: 1.7;
     }
 
-    /* --- BENTO GRID --- */
+    /* --- BENTO GRID (Glassmorphic) --- */
     .bento-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;
-      margin-top: 3rem;
+      gap: 1.5rem;
+      margin-top: 4rem;
     }
 
     .bento-card {
-      background: white;
-      border-radius: 16px;
-      padding: 1.8rem;
-      border: 1px solid rgba(226, 232, 240, 0.8);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      min-height: 260px;
+      justify-content: flex-start;
+      min-height: 300px;
       transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
     }
 
     .bento-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.08);
-      border-color: rgba(79, 70, 229, 0.2);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.05);
+      background: #fff;
     }
 
     .bento-card.span-2 {
@@ -334,79 +363,87 @@
     }
 
     .bento-title {
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
       position: relative;
       z-index: 2;
     }
 
     .bento-desc {
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: var(--text-muted);
       position: relative;
       z-index: 2;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     .bento-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 1.5rem;
-      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      font-size: 1.25rem;
       position: relative;
       z-index: 2;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    .bento-icon i {
+      transition: transform 0.3s;
+    }
+
+    .bento-card:hover .bento-icon i {
+      transform: scale(1.1);
     }
 
     .vis-bg {
       position: absolute;
       inset: 0;
       z-index: 0;
-      opacity: 0.4;
-      transition: transform 0.5s ease;
+      opacity: 0.3;
+      transition: opacity 0.5s ease;
+      filter: blur(40px);
     }
 
-    .bento-card:hover .vis-bg {
-      transform: scale(1.05);
-    }
-
-    /* --- PROJECT CARDS (Fixed & Robust) --- */
+    /* --- PROJECT CARDS (Forced 3 Columns) --- */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      /* Force 3 columns on desktop */
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
     }
 
     .project-card {
       position: relative;
-      height: 450px;
+      height: 520px;
       background: white;
       border-radius: var(--card-radius);
       overflow: hidden;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
+      border: 1px solid #f1f5f9;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02), 0 10px 30px rgba(0, 0, 0, 0.04);
+      transition: all 0.4s ease;
       display: flex;
       flex-direction: column;
     }
 
     .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
-      border-color: rgba(79, 70, 229, 0.2);
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
+      border-color: #e2e8f0;
     }
 
-    /* 3D Visual Area (Top 55%) */
+    /* 3D Visual Area */
     .card-visual {
-      height: 55%;
+      height: 60%;
       width: 100%;
       position: relative;
-      background: #000;
-      /* Fallback */
+      background: #f8fafc;
       overflow: hidden;
     }
 
@@ -414,52 +451,54 @@
       display: block;
       width: 100%;
       height: 100%;
-      transition: transform 0.5s ease;
+      transition: transform 0.6s ease;
     }
 
     .project-card:hover canvas {
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
 
-    /* Content Area (Bottom 45%) */
+    /* Content Area */
     .card-content-wrapper {
-      height: 45%;
+      height: 40%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       background: white;
       z-index: 2;
-      /* Ensures text is on top */
       position: relative;
     }
 
     .card-content {
-      padding: 1.2rem;
+      padding: 1.5rem;
       flex-grow: 1;
     }
 
     .card-tag {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
       color: var(--primary);
-      margin-bottom: 0.3rem;
-      display: block;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      background: #eff6ff;
+      padding: 2px 8px;
+      border-radius: 4px;
     }
 
     .card-title {
-      font-size: 1.4rem;
-      font-weight: 800;
+      font-size: 1.5rem;
+      font-weight: 700;
       color: var(--text-main);
-      line-height: 1.1;
+      line-height: 1.2;
       margin-bottom: 0.5rem;
     }
 
     .card-desc {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--text-muted);
-      line-height: 1.4;
+      line-height: 1.5;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -467,10 +506,9 @@
     }
 
     .card-footer {
-      height: 40px;
-      /* Fixed footer height */
-      background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
+      height: 48px;
+      background: #ffffff;
+      border-top: 1px solid #f1f5f9;
       display: flex;
       align-items: center;
       overflow: hidden;
@@ -480,23 +518,26 @@
     .marquee-mask {
       width: 100%;
       overflow: hidden;
-      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
     }
 
     .marquee-track {
       display: flex;
       align-items: center;
-      gap: 1.5rem;
+      gap: 2rem;
       width: max-content;
-      animation: scrollText 15s linear infinite;
+      animation: scrollText 20s linear infinite;
     }
 
     .tech-item {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      color: var(--text-muted);
+      color: #94a3b8;
       white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     @keyframes scrollText {
@@ -515,77 +556,78 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
       position: relative;
-      margin-top: 4rem;
+      margin-top: 5rem;
     }
 
+    /* Connecting Line */
     .process-line-bg {
       position: absolute;
-      top: 40px;
-      left: 50px;
-      right: 50px;
-      height: 3px;
-      background: linear-gradient(90deg, #e0e7ff 0%, #fbcfe8 100%);
+      top: 48px;
+      left: 60px;
+      right: 60px;
+      height: 2px;
+      background: #e2e8f0;
       z-index: 0;
-      border-radius: 4px;
+    }
+
+    .process-line-fill {
+      position: absolute;
+      top: 48px;
+      left: 60px;
+      width: 75%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      z-index: 0;
+      opacity: 0.5;
     }
 
     .process-card {
       position: relative;
-      background: white;
-      border: 1px solid #f1f5f9;
-      border-radius: 20px;
-      padding: 2rem 1.5rem;
+      background: transparent;
+      padding: 1rem;
       z-index: 1;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
-      overflow: hidden;
       text-align: left;
     }
 
-    .process-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
-      border-color: rgba(79, 70, 229, 0.2);
+    .process-card:hover .process-icon-wrapper {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.25);
+      border-color: var(--primary);
+      color: var(--primary);
     }
 
     .process-icon-wrapper {
-      width: 80px;
-      height: 80px;
-      margin-bottom: 1.5rem;
+      width: 96px;
+      height: 96px;
+      margin-bottom: 2rem;
       background: white;
-      border: 2px solid #e2e8f0;
+      border: 1px solid #e2e8f0;
       border-radius: 50%;
+      /* Circle */
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.5rem;
-      color: var(--primary);
-      box-shadow: 0 0 0 8px white;
+      color: var(--text-muted);
       transition: all 0.3s ease;
+      position: relative;
     }
 
-    .process-card:hover .process-icon-wrapper {
-      border-color: transparent;
-      background: var(--gradient-text);
-      color: white;
-      transform: scale(1.1) rotate(5deg);
-    }
-
-    .process-watermark {
+    .process-step-num {
       position: absolute;
-      top: -15px;
-      right: -10px;
-      font-size: 6rem;
-      font-weight: 800;
-      color: #f1f5f9;
-      z-index: -1;
-      line-height: 1;
-      transition: all 0.3s ease;
-    }
-
-    .process-card:hover .process-watermark {
-      color: #eef2ff;
-      transform: scale(1.1);
+      top: 0;
+      right: 0;
+      background: var(--text-main);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 4px solid white;
     }
 
     .process-title {
@@ -596,31 +638,63 @@
     }
 
     .process-desc {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--text-muted);
-      line-height: 1.5;
+      line-height: 1.6;
+    }
+
+    .process-watermark {
+      display: none;
     }
 
     /* --- Contact --- */
     .contact-wrapper {
       text-align: center;
-      background: radial-gradient(circle at center, #f8fafc 0%, #ffffff 100%);
-      border-radius: 24px;
-      padding: 4rem 2rem;
-      border: 1px solid #e2e8f0;
+      background: var(--text-main);
+      border-radius: 32px;
+      padding: 5rem 2rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     .email-display {
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-size: clamp(2rem, 5vw, 3.5rem);
       font-weight: 700;
-      color: var(--text-main);
-      margin: 1.5rem 0;
+      color: white;
+      margin: 2rem 0;
       display: block;
-      transition: color 0.3s;
+      transition: all 0.3s;
+      letter-spacing: -0.02em;
     }
 
     .email-display:hover {
-      color: var(--primary);
+      color: var(--accent);
+      transform: scale(1.02);
+    }
+
+    .contact-wrapper h2 {
+      color: white;
+    }
+
+    .contact-wrapper p {
+      color: #94a3b8;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 3rem;
     }
 
     /* Mobile */
@@ -633,42 +707,43 @@
         grid-column: auto;
       }
 
+      /* Switch projects back to wrapping on smaller screens */
       .projects-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       }
 
       .process-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 3rem;
+        padding-left: 2rem;
       }
 
       .process-line-bg {
-        width: 4px;
+        width: 2px;
         height: 100%;
         top: 0;
-        left: 40px;
+        left: 18px;
+        /* Align with icon center */
         right: auto;
-        background: linear-gradient(to bottom, #e0e7ff 0%, #fbcfe8 100%);
+      }
+
+      .process-line-fill {
+        display: none;
       }
 
       .process-card {
-        display: flex;
-        align-items: flex-start;
-        gap: 1.5rem;
-        padding: 1.5rem;
+        padding: 0;
+        padding-left: 3rem;
       }
 
       .process-icon-wrapper {
-        width: 50px;
-        height: 50px;
-        font-size: 1rem;
+        position: absolute;
+        left: -48px;
+        top: 0;
+        width: 60px;
+        height: 60px;
+        font-size: 1.2rem;
         margin-bottom: 0;
-        flex-shrink: 0;
-        box-shadow: none;
-      }
-
-      .process-watermark {
-        display: none;
       }
 
       .nav-links {
@@ -678,6 +753,10 @@
       .hero {
         text-align: left;
         padding-top: 100px;
+      }
+
+      .container {
+        padding: 0 1.5rem;
       }
     }
   </style>
@@ -712,10 +791,10 @@
       <div class="hero-content">
         <div class="hero-tags-wrapper">
           <div class="tag-pill tag-green">
-            <i class="fas fa-check-circle"></i> Product-First Engineering
+            <i class="fas fa-check-circle" style="color: var(--accent)"></i> Product-First Engineering
           </div>
           <div class="tag-pill tag-blue">
-            <i class="fas fa-chart-line"></i> Proven Scale
+            <i class="fas fa-chart-line" style="color: var(--primary)"></i> Proven Scale
           </div>
         </div>
 
@@ -739,15 +818,16 @@
     <div class="container">
       <div style="margin-bottom: 3rem;">
         <h2 style="font-size: 2.5rem;">Technical Capabilities</h2>
-        <p style="color: var(--text-muted); max-width: 600px;">Engineering excellence across the full stack. We turn
+        <p style="color: var(--text-muted); max-width: 600px; font-size: 1.1rem;">Engineering excellence across the full
+          stack. We turn
           complex requirements into robust, scalable software.</p>
       </div>
 
       <div class="bento-grid">
         <div class="bento-card span-2">
-          <div class="vis-bg" style="background: radial-gradient(circle at right bottom, #e0e7ff, transparent 60%);">
+          <div class="vis-bg" style="background: radial-gradient(circle at right bottom, #bfdbfe, transparent 70%);">
           </div>
-          <div class="bento-icon" style="background: #eff6ff; color: var(--primary);"><i class="fas fa-brain"></i></div>
+          <div class="bento-icon"><i class="fas fa-brain" style="color: var(--primary);"></i></div>
           <div>
             <div class="bento-title">Enterprise AI & LLM</div>
             <div class="bento-desc">Beyond simple wrappers. We engineer Semantic Search, RAG Architectures, and
@@ -756,8 +836,8 @@
         </div>
 
         <div class="bento-card">
-          <div class="vis-bg" style="background: radial-gradient(circle at right top, #fae8ff, transparent 50%);"></div>
-          <div class="bento-icon" style="background: #fdf2f8; color: var(--accent);"><i class="fas fa-users"></i></div>
+          <div class="vis-bg" style="background: radial-gradient(circle at right top, #ccfbf1, transparent 60%);"></div>
+          <div class="bento-icon"><i class="fas fa-users" style="color: var(--accent);"></i></div>
           <div>
             <div class="bento-title">Staff Augmentation</div>
             <div class="bento-desc">Dedicated High-velocity squads calibrated to your tech stack, tailored to your need.
@@ -767,7 +847,7 @@
         </div>
 
         <div class="bento-card">
-          <div class="bento-icon" style="background: #f0fdf4; color: var(--green);"><i class="fas fa-mobile-alt"></i>
+          <div class="bento-icon"><i class="fas fa-mobile-alt" style="color: #059669;"></i>
           </div>
           <div>
             <div class="bento-title">Web & Mobile Application</div>
@@ -776,9 +856,9 @@
         </div>
 
         <div class="bento-card span-2">
-          <div class="vis-bg" style="background: radial-gradient(circle at left bottom, #ecfeff, transparent 60%);">
+          <div class="vis-bg" style="background: radial-gradient(circle at left bottom, #e0e7ff, transparent 60%);">
           </div>
-          <div class="bento-icon" style="background: #ecfeff; color: var(--teal);"><i class="fas fa-cloud"></i></div>
+          <div class="bento-icon"><i class="fas fa-cloud" style="color: var(--teal);"></i></div>
           <div>
             <div class="bento-title">Cloud-Native Infrastructure</div>
             <div class="bento-desc">Cloud Integration, Cloud Scaling, Kubernetes Orchestration, Multi-Cloud Strategies
@@ -787,9 +867,9 @@
         </div>
 
         <div class="bento-card span-2">
-          <div class="vis-bg" style="background: radial-gradient(circle at left bottom, #f3f4f6, transparent 60%);">
+          <div class="vis-bg" style="background: radial-gradient(circle at left bottom, #f1f5f9, transparent 60%);">
           </div>
-          <div class="bento-icon" style="background: #f1f5f9; color: #475569;"><i class="fas fa-code"></i></div>
+          <div class="bento-icon"><i class="fas fa-code" style="color: #475569;"></i></div>
           <div>
             <div class="bento-title">Bespoke Software</div>
             <div class="bento-desc">Tailored backend systems, microservices, and legacy modernization. Clean,
@@ -798,7 +878,7 @@
         </div>
 
         <div class="bento-card">
-          <div class="bento-icon" style="background: #fff1f2; color: #e11d48;"><i class="fas fa-gamepad"></i></div>
+          <div class="bento-icon"><i class="fas fa-gamepad" style="color: #db2777;"></i></div>
           <div>
             <div class="bento-title">Game Development</div>
             <div class="bento-desc">Unity & Unreal Engine development for immersive gaming and simulation.</div>
@@ -811,7 +891,8 @@
   <section id="portfolio" class="section-padding" style="background: #fff;">
     <div class="container">
       <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Selected Case Studies</h2>
-      <p style="color: var(--text-muted); margin-bottom: 4rem;">A track record of scalability, performance, and
+      <p style="color: var(--text-muted); margin-bottom: 4rem; font-size: 1.1rem;">A track record of scalability,
+        performance, and
         user-centric design.</p>
 
       <div class="projects-grid">
@@ -906,15 +987,16 @@
     <div class="container">
       <div style="text-align: center; max-width: 700px; margin: 0 auto 3rem auto;">
         <h2 style="font-size: 2.5rem;">Operational Framework</h2>
-        <p style="color: var(--text-muted);">A systematic approach to engineering delivery.</p>
+        <p style="color: var(--text-muted); font-size: 1.1rem;">A systematic approach to engineering delivery.</p>
       </div>
 
       <div class="process-grid">
         <div class="process-line-bg"></div>
+        <div class="process-line-fill"></div>
 
         <div class="process-card">
-          <div class="process-watermark">01</div>
           <div class="process-icon-wrapper">
+            <span class="process-step-num">1</span>
             <i class="fas fa-search"></i>
           </div>
           <h3 class="process-title">Technical Discovery</h3>
@@ -923,8 +1005,8 @@
         </div>
 
         <div class="process-card">
-          <div class="process-watermark">02</div>
           <div class="process-icon-wrapper">
+            <span class="process-step-num">2</span>
             <i class="fas fa-sliders-h"></i>
           </div>
           <h3 class="process-title">Talent Calibration</h3>
@@ -933,8 +1015,8 @@
         </div>
 
         <div class="process-card">
-          <div class="process-watermark">03</div>
           <div class="process-icon-wrapper">
+            <span class="process-step-num">3</span>
             <i class="fas fa-code-branch"></i>
           </div>
           <h3 class="process-title">Agile Execution</h3>
@@ -943,8 +1025,8 @@
         </div>
 
         <div class="process-card">
-          <div class="process-watermark">04</div>
           <div class="process-icon-wrapper">
+            <span class="process-step-num">4</span>
             <i class="fas fa-rocket"></i>
           </div>
           <h3 class="process-title">Delivery & Maintenance</h3>
@@ -959,8 +1041,9 @@
   <section id="contact" style="padding: 0 0 4rem 0;">
     <div class="container">
       <div class="contact-wrapper">
-        <h2 style="font-size: 2.5rem;">Ready to Build?</h2>
-        <p style="opacity: 0.8; margin-top: 0.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+        <div class="contact-glow"></div>
+        <h2 style="font-size: 2.5rem; position:relative; z-index:2;">Ready to Build?</h2>
+        <p style="position:relative; z-index:2; font-size: 1.1rem; margin-top: 1rem;">
           Discuss your requirements with our team.
         </p>
 
@@ -974,11 +1057,11 @@
 
   <footer>
     <div class="container"
-      style="display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem; padding-top: 2rem; border-top: 1px solid #f1f5f9;">
+      style="display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem; padding: 2rem 0; border-top: 1px solid #e2e8f0;">
       <div>&copy; 2025 Olik Lab. All rights reserved.</div>
-      <div style="display: flex; gap: 1.5rem;">
-        <a href="#">LinkedIn</a>
-        <a href="https://github.com/oliklab">Github</a>
+      <div style="display: flex; gap: 2rem;">
+        <a href="#" style="hover:color:var(--text-main)">LinkedIn</a>
+        <a href="https://github.com/oliklab" style="hover:color:var(--text-main)">Github</a>
       </div>
     </div>
   </footer>
@@ -1010,190 +1093,353 @@
       loop();
     }
 
-    // --- Three.js Animations ---
+    // --- Modern Three.js Animations ---
     function initThreeJS() {
 
-      // 1. FINTECH (Golden Cube)
+      const primaryColor = 0x3b82f6; // Blue
+      const accentColor = 0x10b981;  // Emerald
+      const darkColor = 0x1e293b;    // Slate
+
+      // 1. FINTECH: Morphing Shapes + Live Tracker
       function initFintech() {
         const container = document.getElementById('canvas-fintech');
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x1e1b4b); // Dark Blue
-        const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
-        camera.position.z = 5;
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        scene.background = new THREE.Color(0xf8fafc);
+
+        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.set(0, 0, 12);
+
+        const renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
         container.appendChild(renderer.domElement);
 
-        // Lights
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
         scene.add(ambientLight);
-        const pointLight = new THREE.PointLight(0xffd700, 1);
-        pointLight.position.set(5, 5, 5);
-        scene.add(pointLight);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+        dirLight.position.set(5, 5, 7);
+        scene.add(dirLight);
 
-        // Gold Cube (Icosahedron for crystal look)
-        const geometry = new THREE.IcosahedronGeometry(1.2, 0);
-        const material = new THREE.MeshStandardMaterial({
-          color: 0xffd700,
-          metalness: 0.9,
-          roughness: 0.1,
-          wireframe: true
-        });
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
+        // Group for the morphing object
+        const morphGroup = new THREE.Group();
+        scene.add(morphGroup);
 
-        // Orbiting Particles
-        const particles = new THREE.Group();
-        const pGeo = new THREE.SphereGeometry(0.1, 8, 8);
-        const pMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-        for (let i = 0; i < 10; i++) {
-          const mesh = new THREE.Mesh(pGeo, pMat);
-          mesh.position.set(
-            (Math.random() - 0.5) * 4,
-            (Math.random() - 0.5) * 4,
-            (Math.random() - 0.5) * 4
-          );
-          particles.add(mesh);
+        // Create scattered shapes (Triangles/Tetrahedrons)
+        const shapes = [];
+        const geometry = new THREE.TetrahedronGeometry(0.3);
+        const material = new THREE.MeshStandardMaterial({ color: primaryColor, flatShading: true });
+
+        for (let i = 0; i < 40; i++) {
+          const mesh = new THREE.Mesh(geometry, material);
+          // Initial random positions
+          mesh.userData = {
+            initialX: (Math.random() - 0.5) * 6,
+            initialY: (Math.random() - 0.5) * 6,
+            initialZ: (Math.random() - 0.5) * 6,
+            speed: 0.02 + Math.random() * 0.03
+          };
+          mesh.position.set(mesh.userData.initialX, mesh.userData.initialY, mesh.userData.initialZ);
+          mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+          morphGroup.add(mesh);
+          shapes.push(mesh);
         }
-        scene.add(particles);
+
+        // The Tracker (Bar Chart)
+        const trackerGroup = new THREE.Group();
+        const barGeo = new THREE.BoxGeometry(0.6, 1, 0.6);
+        const barMat = new THREE.MeshStandardMaterial({ color: accentColor });
+
+        const bars = [];
+        for (let k = 0; k < 4; k++) {
+          const bar = new THREE.Mesh(barGeo, barMat);
+          bar.position.set((k - 1.5) * 0.8, -2.5, 0); // Position at bottom
+          bar.scale.y = 1;
+          bar.userData = { offset: k }; // Phase offset for animation
+          trackerGroup.add(bar);
+          bars.push(bar);
+        }
+        scene.add(trackerGroup);
 
         function animate() {
           requestAnimationFrame(animate);
-          cube.rotation.x += 0.005;
-          cube.rotation.y += 0.01;
-          particles.rotation.y -= 0.005;
+          const time = Date.now() * 0.001;
+
+          // 1. Morphing Animation
+          // Shapes move from Chaos (Initial) to Order (Sphere shape)
+          shapes.forEach((mesh, idx) => {
+            // Target position (Sphere formation)
+            const theta = idx * 0.5;
+            const phi = idx * 0.3;
+            const targetX = 2.5 * Math.sin(theta) * Math.cos(phi);
+            const targetY = 2.5 * Math.sin(theta) * Math.sin(phi);
+            const targetZ = 2.5 * Math.cos(theta);
+
+            // Lerp between random and target based on sine wave
+            const morphFactor = (Math.sin(time * 0.8) + 1) / 2; // 0 to 1
+
+            mesh.position.x = THREE.MathUtils.lerp(mesh.userData.initialX, targetX, morphFactor);
+            mesh.position.y = THREE.MathUtils.lerp(mesh.userData.initialY, targetY, morphFactor);
+            mesh.position.z = THREE.MathUtils.lerp(mesh.userData.initialZ, targetZ, morphFactor);
+
+            mesh.rotation.x += 0.01;
+            mesh.rotation.y += 0.01;
+          });
+
+          morphGroup.rotation.y += 0.005;
+
+          // 2. Tracker Animation
+          bars.forEach(bar => {
+            // Bars grow and shrink like a live stock chart
+            const scaleY = 1.5 + Math.sin(time * 2 + bar.userData.offset) * 1;
+            bar.scale.y = Math.max(0.1, scaleY);
+            bar.position.y = -3 + (scaleY * 0.5); // Keep base anchored
+          });
+
           renderer.render(scene, camera);
         }
         animate();
       }
 
-      // 2. ADTECH (Pastel City)
+      // 2. ADTECH: Miniature City with Traffic
       function initAdTech() {
         const container = document.getElementById('canvas-adtech');
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xfff7ed); // Pastel Orange/White
+        scene.background = new THREE.Color(0xf1f5f9);
 
-        // Isometric Camera
+        // Isometric Camera for "Miniature" feel
         const aspect = container.clientWidth / container.clientHeight;
-        const d = 4;
+        const d = 5;
         const camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 1, 1000);
         camera.position.set(20, 20, 20);
         camera.lookAt(scene.position);
 
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        const renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
         container.appendChild(renderer.domElement);
 
         // Light
-        const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-        dirLight.position.set(10, 20, 10);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.9);
+        dirLight.position.set(10, 20, 5);
+        dirLight.castShadow = true;
         scene.add(dirLight);
         scene.add(new THREE.AmbientLight(0xffffff, 0.6));
 
         // City Group
         const city = new THREE.Group();
+        scene.add(city);
 
-        // Ground
-        const planeGeo = new THREE.PlaneGeometry(10, 10);
-        const planeMat = new THREE.MeshBasicMaterial({ color: 0xe5e7eb });
-        const plane = new THREE.Mesh(planeGeo, planeMat);
+        // Ground Plane
+        const plane = new THREE.Mesh(
+          new THREE.PlaneGeometry(12, 12),
+          new THREE.MeshBasicMaterial({ color: 0xe2e8f0 })
+        );
         plane.rotation.x = -Math.PI / 2;
         city.add(plane);
 
-        // Buildings
-        const bGeo = new THREE.BoxGeometry(1, 1, 1);
-        const bMat1 = new THREE.MeshStandardMaterial({ color: 0xfca5a5 }); // Pastel Red
-        const bMat2 = new THREE.MeshStandardMaterial({ color: 0x93c5fd }); // Pastel Blue
+        // Buildings Generator
+        const buildings = [];
+        const gridSize = 4; // 4x4 grid
+        const spacing = 1.5;
 
-        const b1 = new THREE.Mesh(bGeo, bMat1);
-        b1.position.set(-1, 0.5, -1);
-        b1.scale.y = 2;
-        city.add(b1);
+        const bMatBlue = new THREE.MeshStandardMaterial({ color: primaryColor });
+        const bMatDark = new THREE.MeshStandardMaterial({ color: darkColor });
 
-        const b2 = new THREE.Mesh(bGeo, bMat2);
-        b2.position.set(1, 0.75, 0.5);
-        b2.scale.y = 1.5;
-        city.add(b2);
+        for (let x = -gridSize / 2; x < gridSize / 2; x++) {
+          for (let z = -gridSize / 2; z < gridSize / 2; z++) {
+            // Leave some empty spots for "parks" or variation
+            if (Math.random() > 0.8) continue;
 
-        // Car
-        const carGeo = new THREE.BoxGeometry(0.4, 0.2, 0.6);
-        const carMat = new THREE.MeshStandardMaterial({ color: 0x86efac });
-        const car = new THREE.Mesh(carGeo, carMat);
-        car.position.set(0, 0.1, 2);
-        city.add(car);
+            const height = 0.5 + Math.random() * 2;
+            const geo = new THREE.BoxGeometry(0.8, height, 0.8);
+            const mat = Math.random() > 0.5 ? bMatBlue : bMatDark;
+            const mesh = new THREE.Mesh(geo, mat);
 
-        scene.add(city);
+            mesh.position.set(x * spacing + 0.75, height / 2, z * spacing + 0.75);
+            city.add(mesh);
+            buildings.push(mesh);
+          }
+        }
 
-        let carSpeed = 0.02;
+        // Cars System
+        const cars = [];
+        const carGeo = new THREE.BoxGeometry(0.4, 0.2, 0.2);
+        const carMat = new THREE.MeshBasicMaterial({ color: accentColor }); // Emerald lights
+
+        // Add 6 cars
+        for (let i = 0; i < 6; i++) {
+          const car = new THREE.Mesh(carGeo, carMat);
+          // Randomly assign to a "road" (between grid lines)
+          const isXAxis = Math.random() > 0.5;
+          const lane = (Math.floor(Math.random() * gridSize) - gridSize / 2) * spacing;
+
+          car.userData = {
+            axis: isXAxis ? 'x' : 'z',
+            lane: lane,
+            speed: 0.02 + Math.random() * 0.03,
+            direction: Math.random() > 0.5 ? 1 : -1
+          };
+
+          if (isXAxis) {
+            car.position.set(0, 0.15, lane);
+            car.rotation.y = 0;
+          } else {
+            car.position.set(lane, 0.15, 0);
+            car.rotation.y = Math.PI / 2;
+          }
+
+          city.add(car);
+          cars.push(car);
+        }
+
         function animate() {
           requestAnimationFrame(animate);
-          // Rotate entire city slowly
-          city.rotation.y += 0.002;
 
-          // Move car
-          car.position.z -= carSpeed;
-          if (car.position.z < -4) car.position.z = 4;
+          // Rotate city slowly
+          city.rotation.y += 0.001;
+
+          // Move Cars
+          cars.forEach(car => {
+            const limit = 4;
+            if (car.userData.axis === 'x') {
+              car.position.x += car.userData.speed * car.userData.direction;
+              // Wrap around
+              if (car.position.x > limit) car.position.x = -limit;
+              if (car.position.x < -limit) car.position.x = limit;
+            } else {
+              car.position.z += car.userData.speed * car.userData.direction;
+              if (car.position.z > limit) car.position.z = -limit;
+              if (car.position.z < -limit) car.position.z = limit;
+            }
+          });
 
           renderer.render(scene, camera);
         }
         animate();
       }
 
-      // 3. CLOUD (Floating Shapes)
+      // 3. CLOUD/MOBILE: Phones + Expense Tracker
       function initCloud() {
         const container = document.getElementById('canvas-cloud');
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x0f172a); // Dark Slate
+        scene.background = new THREE.Color(0xf8fafc);
+
         const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
-        camera.position.z = 6;
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        camera.position.set(0, 1, 7);
+
+        const renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
         container.appendChild(renderer.domElement);
 
-        const light = new THREE.PointLight(0x06b6d4, 2, 50);
-        light.position.set(2, 2, 2);
-        scene.add(light);
-        scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0x06b6d4, 1.5);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
 
-        // Floating Phone Shape
-        const geo = new THREE.BoxGeometry(1.5, 3, 0.2);
-        const mat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.2 });
-        const phone = new THREE.Mesh(geo, mat);
-        scene.add(phone);
+        // Group to hold phones
+        const deviceGroup = new THREE.Group();
+        scene.add(deviceGroup);
 
-        // Screen
-        const screenGeo = new THREE.PlaneGeometry(1.3, 2.8);
-        const screenMat = new THREE.MeshBasicMaterial({ color: 0x0ea5e9 });
-        const screen = new THREE.Mesh(screenGeo, screenMat);
-        screen.position.z = 0.11;
-        phone.add(screen);
+        // Helper to make a phone
+        function createPhone(x, y, z) {
+          const phone = new THREE.Group();
 
-        // Floating Clouds
-        const cGeo = new THREE.SphereGeometry(0.4, 16, 16);
-        const cMat = new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 });
+          // Body
+          const bodyGeo = new THREE.BoxGeometry(1.8, 3.2, 0.15);
+          const bodyMat = new THREE.MeshStandardMaterial({ color: darkColor, roughness: 0.3 });
+          const body = new THREE.Mesh(bodyGeo, bodyMat);
+          phone.add(body);
 
-        const cloud1 = new THREE.Mesh(cGeo, cMat);
-        cloud1.position.set(2, 1, -1);
-        scene.add(cloud1);
+          // Screen
+          const screenGeo = new THREE.PlaneGeometry(1.6, 3);
+          const screenMat = new THREE.MeshBasicMaterial({ color: 0xffffff }); // White bg for screen
+          const screen = new THREE.Mesh(screenGeo, screenMat);
+          screen.position.z = 0.08;
+          phone.add(screen);
 
-        const cloud2 = new THREE.Mesh(cGeo, cMat);
-        cloud2.position.set(-2, -1, 1);
-        scene.add(cloud2);
+          // Expense Bars on Screen
+          const barGeo = new THREE.PlaneGeometry(0.3, 1);
+          const barMat = new THREE.MeshBasicMaterial({ color: accentColor });
+
+          const bars = [];
+          for (let i = 0; i < 3; i++) {
+            const bar = new THREE.Mesh(barGeo, barMat);
+            bar.position.set((i - 1) * 0.4, -0.5, 0.09); // On top of screen
+            bar.userData = { speed: 2 + i };
+            phone.add(bar);
+            bars.push(bar);
+          }
+
+          phone.position.set(x, y, z);
+          phone.userData = { bars: bars }; // Store ref to animate
+          return phone;
+        }
+
+        // Create 3 Phones
+        const mainPhone = createPhone(0, 0, 0);
+        deviceGroup.add(mainPhone);
+
+        const leftPhone = createPhone(-2.5, -0.5, -1);
+        leftPhone.rotation.y = 0.3;
+        leftPhone.scale.set(0.8, 0.8, 0.8);
+        deviceGroup.add(leftPhone);
+
+        const rightPhone = createPhone(2.5, -0.5, -1);
+        rightPhone.rotation.y = -0.3;
+        rightPhone.scale.set(0.8, 0.8, 0.8);
+        deviceGroup.add(rightPhone);
+
+        // Floating Data "Coins"
+        const particles = new THREE.Group();
+        const coinGeo = new THREE.CylinderGeometry(0.15, 0.15, 0.05, 16);
+        const coinMat = new THREE.MeshStandardMaterial({ color: 0xffb700, metalness: 0.8, roughness: 0.2 });
+
+        for (let i = 0; i < 12; i++) {
+          const coin = new THREE.Mesh(coinGeo, coinMat);
+          coin.rotation.x = Math.PI / 2;
+          coin.position.set(
+            (Math.random() - 0.5) * 5,
+            (Math.random() - 0.5) * 5,
+            (Math.random() - 0.5) * 2
+          );
+          coin.userData = {
+            speedY: 0.01 + Math.random() * 0.02,
+            wobble: Math.random() * Math.PI
+          };
+          particles.add(coin);
+        }
+        scene.add(particles);
 
         function animate() {
           requestAnimationFrame(animate);
-          phone.rotation.y = Math.sin(Date.now() * 0.001) * 0.2;
-          phone.position.y = Math.sin(Date.now() * 0.002) * 0.2;
+          const time = Date.now() * 0.003;
 
-          cloud1.position.x = Math.sin(Date.now() * 0.001) * 2.5;
-          cloud2.position.x = Math.cos(Date.now() * 0.001) * 2.5;
+          // Float the whole group
+          deviceGroup.position.y = Math.sin(time * 0.5) * 0.2;
+          deviceGroup.rotation.y = Math.sin(time * 0.2) * 0.05;
+
+          // Animate Expense Bars on all phones
+          [mainPhone, leftPhone, rightPhone].forEach(phone => {
+            phone.userData.bars.forEach((bar, idx) => {
+              const h = 0.5 + Math.abs(Math.sin(time * (1 + idx * 0.5))) * 1;
+              bar.scale.y = h;
+              bar.position.y = -0.8 + (h * 0.5); // Grow from bottom
+            });
+          });
+
+          // Animate Coins
+          particles.children.forEach(coin => {
+            coin.position.y += coin.userData.speedY;
+            coin.rotation.z += 0.02;
+            // Reset if too high
+            if (coin.position.y > 3) coin.position.y = -3;
+          });
 
           renderer.render(scene, camera);
         }
         animate();
       }
 
-      // Initialize all
       initFintech();
       initAdTech();
       initCloud();
@@ -1204,7 +1450,6 @@
       initThreeJS();
     });
 
-    // --- Header Scroll State ---
     window.addEventListener('scroll', () => {
       const header = document.querySelector('header');
       if (window.scrollY > 50) header.classList.add('scrolled');
