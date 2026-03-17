@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | Olik Lab</title>
+  <meta name="description" content="Privacy Policy for Olik Lab applications and services.">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      /* Palette Update: Cleaner, cooler, more professional */
+      --bg-body: #ffffff;
+      --bg-soft: #f1f5f9;
+      --text-main: #0f172a;
+      /* Slate 900 */
+      --text-muted: #475569;
+      /* Slate 600 */
+
+      /* Primary is now a sophisticated Indigo-Blue */
+      --primary: #3b82f6;
+
+      /* Accent is now Teal/Emerald (positive connotation) instead of Pink */
+      --accent: #10b981;
+
+      --teal: #06b6d4;
+      --indigo: #6366f1;
+
+      /* New Gradient: Blue to Teal (Fresh, Modern, Trustworthy) */
+      --gradient-text: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
+
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --card-radius: 24px;
+      /* Slightly softer corners */
+      --container-width: 1140px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      font-size: 16px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text-main);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* --- Background Aurora Blobs (Subtler) --- */
+    .aurora-bg {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+      background: #ffffff;
+      pointer-events: none;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      /* More blur for smoothness */
+      opacity: 0.4;
+      /* Lower opacity for subtlety */
+      animation: float 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .blob-1 {
+      top: -10%;
+      left: -5%;
+      width: 60vw;
+      height: 60vw;
+      background: #dbeafe;
+      /* Light Blue */
+    }
+
+    .blob-2 {
+      bottom: -10%;
+      right: -10%;
+      width: 50vw;
+      height: 50vw;
+      background: #ccfbf1;
+      /* Light Teal */
+      animation-delay: -5s;
+    }
+
+    .blob-3 {
+      top: 30%;
+      left: 20%;
+      width: 40vw;
+      height: 40vw;
+      background: #e0e7ff;
+      /* Indigo tint */
+      animation-delay: -10s;
+      opacity: 0.3;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(30px, -30px) scale(1.05);
+      }
+    }
+
+    /* --- Layout Utilities --- */
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* --- Header --- */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      letter-spacing: -0.03em;
+    }
+
+    .btn {
+      padding: 0.6rem 1.5rem;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      border: 1px solid #cbd5e1;
+      background: transparent;
+    }
+
+    .btn:hover {
+      background: var(--text-main);
+      color: white;
+      border-color: var(--text-main);
+    }
+
+    /* --- Privacy Content --- */
+    .policy-wrapper {
+      padding-top: 120px;
+      padding-bottom: 4rem;
+    }
+
+    .policy-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      border-radius: var(--card-radius);
+      padding: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .policy-header {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .policy-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .last-updated {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .policy-content h2 {
+      font-size: 1.5rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .policy-content h3 {
+      font-size: 1.15rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: var(--text-main);
+    }
+
+    .policy-content p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .policy-content ul {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .policy-content li {
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      line-height: 1.7;
+    }
+
+    .policy-content strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .contact-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .contact-box p {
+      margin-bottom: 0.5rem;
+    }
+
+    .email-link {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .email-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #e2e8f0;
+      padding: 2rem 0;
+      margin-top: auto;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .policy-card {
+        padding: 1.5rem;
+      }
+
+      .policy-header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="aurora-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">
+          <i class="fas fa-layer-group" style="color: var(--primary);"></i> Olik Lab.
+        </a>
+        <a href="index.html" class="btn">
+          <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container policy-wrapper">
+    <div class="policy-card">
+      <div class="policy-header">
+        <h1>Privacy Policy</h1>
+        <span class="last-updated">Last Updated: January 15, 2026</span>
+      </div>
+
+      <div class="policy-content">
+        <p>
+          Welcome to Olik Lab ("we," "our," or "us"). We are committed to protecting your personal
+          data and respecting your privacy. This policy explains how we collect, use, and safeguard your information
+          when you use our applications and services available on the Google Play Store and other platforms.
+        </p>
+
+        <p>
+          By using our applications, you agree to the collection and use of information in accordance with this policy.
+        </p>
+
+        <h2>1. Information We Collect</h2>
+        <p>We collect only the information necessary to provide and improve the features of our applications.</p>
+
+        <h3>1.1. Personal Information</h3>
+        <ul>
+          <li><strong>Account Data:</strong> For apps requiring login, we may collect your email address and name (via
+            Google Sign-In or email Auth) to create and secure your account.</li>
+          <li><strong>User Content:</strong> Data you explicitly enter into the app (e.g., preferences, tracking logs,
+            settings) is stored to provide the service.</li>
+        </ul>
+
+        <h3>1.2. Device & Usage Information</h3>
+        <p>We may collect limited non-personal information about your device to ensure app stability and performance:
+        </p>
+        <ul>
+          <li>Device model and operating system version.</li>
+          <li>Crash logs and performance metrics (anonymized).</li>
+        </ul>
+
+        <h2>2. How We Use Your Information</h2>
+        <p>We use your data strictly for the following purposes:</p>
+        <ul>
+          <li>To provide, operate, and maintain our applications.</li>
+          <li>To sync your data securely across your devices (where cloud sync is applicable).</li>
+          <li>To improve user experience and fix technical issues.</li>
+          <li>We <strong>do not sell</strong> your personal data to third parties.</li>
+        </ul>
+
+        <h2>3. Third-Party Services</h2>
+        <p>We may use trusted third-party services to facilitate our Service:</p>
+        <ul>
+          <li><strong>Google Firebase:</strong> Used for secure cloud storage, authentication, and database services.
+          </li>
+          <li><strong>Google AdMob:</strong> Some of our free applications may display advertisements. AdMob may collect
+            device identifiers to show non-personalized or personalized ads based on your consent settings.</li>
+        </ul>
+
+        <h2>4. Data Retention & Deletion</h2>
+        <p>
+          We retain your personal data only as long as is necessary for the purposes set out in this Privacy Policy.
+        </p>
+        <ul>
+          <li>You can delete your data directly within our applications using the provided delete functions.</li>
+          <li>You can request full account deletion by contacting us. Upon deletion, all your data is permanently
+            removed
+            from our servers.</li>
+        </ul>
+
+        <h2>5. Children's Privacy</h2>
+        <p>
+          Our services are not intended for use by children under the age of 13. We do not knowingly collect personal
+          identifiable information from children under 13. If we discover that a child under 13 has provided us with
+          personal information, we immediately delete this from our servers.
+        </p>
+
+        <h2>6. Contact Us</h2>
+        <p>
+          If you have any questions about this Privacy Policy, please contact us.
+        </p>
+
+        <div class="contact-box">
+          <p><strong>Olik Lab Support Team</strong></p>
+          <p>Email: <a href="mailto:hello@oliklab.com" class="email-display email-link">hello@oliklab.com</a></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      &copy; 2026 Olik Lab. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+
+</html>
